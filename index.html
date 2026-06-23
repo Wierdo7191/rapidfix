@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RapidFix Kenya | Appliance Repair</title>
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- Google Font (Inter) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .hero-gradient {
+      background: linear-gradient(145deg, #0b1a33 0%, #142b4a 100%);
+    }
+    .logo-badge {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      box-shadow: 0 8px 20px -6px rgba(245, 158, 11, 0.3);
+    }
+    .card-shadow {
+      box-shadow: 0 10px 25px -8px rgba(0,0,0,0.08);
+    }
+    .service-tag {
+      background: #eef2f6;
+      color: #1e293b;
+    }
+    .whatsapp-btn {
+      background: #25D366;
+      transition: all 0.2s;
+    }
+    .whatsapp-btn:hover {
+      background: #1da851;
+      transform: scale(1.03);
+    }
+    .call-btn {
+      background: #0b1a33;
+      transition: all 0.2s;
+    }
+    .call-btn:hover {
+      background: #1f3a5f;
+      transform: scale(1.02);
+    }
+    .section-badge {
+      background: #dbeafe;
+      color: #1e4a7a;
+      font-weight: 600;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      display: inline-block;
+      letter-spacing: 0.3px;
+    }
+    .area-chip {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 0.3rem 0.9rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      color: #1e293b;
+      transition: 0.1s ease;
+    }
+    .area-chip:hover {
+      background: #eef2f6;
+      border-color: #b0c4de;
+    }
+    footer a {
+      color: #cbd5e1;
+      transition: 0.2s;
+    }
+    footer a:hover { color: #facc15; }
+    .cover-photo {
+      background: linear-gradient(135deg, #0b1a33 0%, #1f3a5f 100%);
+      border-radius: 24px;
+      padding: 2rem 2.5rem;
+    }
+    .logo-text {
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======= HEADER / NAV ======= -->
+  <header class="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between">
+      <!-- Logo + brand -->
+      <div class="flex items-center gap-2">
+        <div class="logo-badge w-10 h-10 rounded-xl flex items-center justify-center text-white text-xl">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <div>
+          <span class="logo-text text-2xl text-gray-800">RapidFix</span>
+          <span class="text-sm font-semibold text-yellow-600 bg-yellow-50 px-2 py-0.5 rounded-full ml-1">Kenya</span>
+        </div>
+      </div>
+      <!-- CTA buttons (mobile friendly) -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="tel:0768201855" class="call-btn text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 shadow-md">
+          <i class="fas fa-phone-alt"></i> <span class="hidden sm:inline">Call</span> 0768 201 855
+        </a>
+        <a href="https://wa.me/254768201855" target="_blank" class="whatsapp-btn text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 shadow-md">
+          <i class="fab fa-whatsapp"></i> <span class="hidden sm:inline">WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ======= HERO + COVER PHOTO ======= -->
+    <section class="hero-gradient text-white py-10 md:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+          <!-- left hero text -->
+          <div class="md:w-3/5">
+            <div class="flex items-center gap-2 text-yellow-300 text-sm font-semibold uppercase tracking-wider mb-3">
+              <i class="fas fa-shield-alt"></i> <span>NAIROBI'S TRUSTED REPAIR EXPERTS</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
+              Fast & Affordable <br class="hidden sm:block" />
+              <span class="text-yellow-300">Appliances Repair</span> in Nairobi
+            </h1>
+            <p class="text-gray-300 text-base sm:text-lg mt-3 max-w-xl">
+              Expert repair for TVs, washing machines, cookers & all home appliances. Certified technical service across Kenya.
+            </p>
+            <div class="flex flex-wrap items-center gap-4 mt-6">
+              <a href="tel:0768201855" class="bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-bold px-6 py-3 rounded-full shadow-lg flex items-center gap-2 transition">
+                <i class="fas fa-phone-alt"></i> Call 0768 201 855
+              </a>
+              <a href="#services" class="border border-white/30 hover:bg-white/10 text-white px-6 py-3 rounded-full flex items-center gap-2 transition">
+                Our Services <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+            <!-- mini stats -->
+            <div class="flex flex-wrap gap-6 mt-8 text-sm text-gray-200">
+              <span><i class="fas fa-check-circle text-yellow-400 mr-1"></i> 500+ Repairs Done</span>
+              <span><i class="fas fa-user-cog text-yellow-400 mr-1"></i> 7+ Years Experience</span>
+              <span><i class="fas fa-clock text-yellow-400 mr-1"></i> 24h Response Time</span>
+            </div>
+          </div>
+          <!-- COVER PHOTO (right) – visual card -->
+          <div class="md:w-2/5 w-full">
+            <div class="cover-photo shadow-2xl relative overflow-hidden border border-white/10">
+              <div class="flex flex-col items-start gap-1">
+                <div class="flex items-center gap-2 text-yellow-300 text-sm font-semibold">
+                  <i class="fas fa-bolt"></i> <span>RapidFix Kenya</span>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Same-Day Service</h2>
+                <p class="text-gray-200 text-sm">Call us – we come to you</p>
+                <div class="mt-3 flex items-center gap-3 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-xl">
+                  <i class="fas fa-tools text-yellow-400 text-xl"></i>
+                  <span class="text-white font-medium">TV • Washing • Fridge • Cooker</span>
+                </div>
+                <div class="mt-4 flex gap-4 text-xs text-gray-300">
+                  <span><i class="fas fa-map-pin text-yellow-400"></i> Westlands • Kilimani • Karen</span>
+                  <span><i class="fas fa-wrench text-yellow-400"></i> All brands</span>
+                </div>
+              </div>
+              <!-- decorative icon -->
+              <div class="absolute -right-6 -bottom-6 text-yellow-500/20 text-8xl">
+                <i class="fas fa-microchip"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= ABOUT US ======= -->
+    <section class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col md:flex-row gap-8 items-start">
+          <div class="md:w-2/3">
+            <span class="section-badge"><i class="fas fa-info-circle mr-1"></i> ABOUT US</span>
+            <h2 class="text-3xl font-extrabold text-gray-800 mt-2">Nairobi's Premier Appliance Repair Specialists</h2>
+            <p class="text-gray-600 mt-3 leading-relaxed">
+              RapidFix Kenya is your go-to repair centre for all home and commercial appliances. We provide fast, reliable, and affordable repair services across Nairobi, with a focus on TV repair, washing machine repair, fridge repair, and general electronics repair in Nairobi.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+              <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                <i class="fas fa-certificate text-blue-600 text-xl"></i>
+                <h4 class="font-bold text-gray-800 mt-1">Certified & Experienced</h4>
+                <p class="text-sm text-gray-600">7+ years hands-on experience, all major brands.</p>
+              </div>
+              <div class="bg-green-50 p-4 rounded-xl border border-green-100">
+                <i class="fas fa-clock text-green-600 text-xl"></i>
+                <h4 class="font-bold text-gray-800 mt-1">Same-Day & Emergency</h4>
+                <p class="text-sm text-gray-600">Quick response, fixed right the first time.</p>
+              </div>
+              <div class="bg-yellow-50 p-4 rounded-xl border border-yellow-100">
+                <i class="fas fa-shield-alt text-yellow-600 text-xl"></i>
+                <h4 class="font-bold text-gray-800 mt-1">Warranty on All Repairs</h4>
+                <p class="text-sm text-gray-600">We stand behind our work.</p>
+              </div>
+            </div>
+          </div>
+          <div class="md:w-1/3 bg-gray-50 p-6 rounded-2xl border border-gray-200">
+            <div class="flex items-center gap-3 text-gray-700">
+              <i class="fas fa-phone-alt text-2xl text-yellow-600"></i>
+              <div>
+                <p class="text-sm font-semibold">Call / WhatsApp</p>
+                <p class="text-xl font-bold text-gray-900">0768 201 855</p>
+              </div>
+            </div>
+            <hr class="my-3" />
+            <div class="flex items-center gap-3 text-gray-700">
+              <i class="fas fa-envelope text-2xl text-yellow-600"></i>
+              <div>
+                <p class="text-sm font-semibold">Email</p>
+                <p class="text-sm">info@rapidfixkenya.co.ke</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= SERVICES (WHAT WE FIX) ======= -->
+    <section id="services" class="py-12 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10">
+          <span class="section-badge"><i class="fas fa-tools mr-1"></i> WHAT WE FIX</span>
+          <h2 class="text-3xl font-extrabold text-gray-800 mt-1">Our Appliance Repair Services</h2>
+          <p class="text-gray-500 max-w-2xl mx-auto">From television repair in Nairobi to washing machine and fridge repairs — our certified technicians handle all major brands and appliance types.</p>
+        </div>
+
+        <!-- service grid (first 4) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="bg-white p-5 rounded-2xl card-shadow border border-gray-100 hover:shadow-lg transition">
+            <span class="text-xs font-bold text-yellow-700 bg-yellow-100 px-3 py-1 rounded-full">POPULAR</span>
+            <h3 class="text-lg font-bold mt-2 flex items-start gap-2"><i class="fas fa-tv text-yellow-600"></i> Television Repair</h3>
+            <p class="text-sm text-gray-500 mt-1">LED, LCD, OLED, Smart TVs – panel, power, backlight & software.</p>
+            <a href="#" class="text-sm font-semibold text-yellow-600 mt-3 inline-block">Book Repair →</a>
+          </div>
+          <div class="bg-white p-5 rounded-2xl card-shadow border border-gray-100 hover:shadow-lg transition">
+            <span class="text-xs font-bold text-yellow-700 bg-yellow-100 px-3 py-1 rounded-full">POPULAR</span>
+            <h3 class="text-lg font-bold mt-2 flex items-start gap-2"><i class="fas fa-tshirt text-yellow-600"></i> Washing Machine</h3>
+            <p class="text-sm text-gray-500 mt-1">Front/top-load, drum, motor, pump, PCB board & electronic faults.</p>
+            <a href="#" class="text-sm font-semibold text-yellow-600 mt-3 inline-block">Book Repair →</a>
+          </div>
+          <div class="bg-white p-5 rounded-2xl card-shadow border border-gray-100 hover:shadow-lg transition">
+            <span class="text-xs font-bold text-yellow-700 bg-yellow-100 px-3 py-1 rounded-full">POPULAR</span>
+            <h3 class="text-lg font-bold mt-2 flex items-start gap-2"><i class="fas fa-snowflake text-yellow-600"></i> Refrigerator & Fridge</h3>
+            <p class="text-sm text-gray-500 mt-1">Compressor, gas recharge, thermostat, seal & all fridge faults.</p>
+            <a href="#" class="text-sm font-semibold text-yellow-600 mt-3 inline-block">Book Repair →</a>
+          </div>
+          <div class="bg-white p-5 rounded-2xl card-shadow border border-gray-100 hover:shadow-lg transition">
+            <span class="text-xs font-bold text-gray-600 bg-gray-100 px-3 py-1 rounded-full">POPULAR</span>
+            <h3 class="text-lg font-bold mt-2 flex items-start gap-2"><i class="fas fa-microphone text-yellow-600"></i> Home Theatre</h3>
+            <p class="text-sm text-gray-500 mt-1">Sound system, amplifier, speaker & component repair.</p>
+            <a href="#" class="text-sm font-semibold text-yellow-600 mt-3 inline-block">Book Repair →</a>
+          </div>
+        </div>
+
+        <!-- second row (others) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mt-6">
+          <div class="bg-white p-3 rounded-xl text-center border text-sm font-medium text-gray-700 shadow-sm"><i class="fas fa-fire text-yellow-600 mr-1"></i> Cooker</div>
+          <div class="bg-white p-3 rounded-xl text-center border text-sm font-medium text-gray-700 shadow-sm"><i class="fas fa-tint text-yellow-600 mr-1"></i> Tumble Dryer</div>
+          <div class="bg-white p-3 rounded-xl text-center border text-sm font-medium text-gray-700 shadow-sm"><i class="fas fa-mug-hot text-yellow-600 mr-1"></i> Water Dispenser</div>
+          <div class="bg-white p-3 rounded-xl text-center border text-sm font-medium text-gray-700 shadow-sm"><i class="fas fa-utensils text-yellow-600 mr-1"></i> Dishwasher</div>
+          <div class="bg-white p-3 rounded-xl text-center border text-sm font-medium text-gray-700 shadow-sm"><i class="fas fa-broom text-yellow-600 mr-1"></i> Vacuum Cleaner</div>
+          <div class="bg-white p-3 rounded-xl text-center border text-sm font-medium text-gray-700 shadow-sm"><i class="fas fa-water text-yellow-600 mr-1"></i> Water Pump</div>
+          <div class="bg-white p-3 rounded-xl text-center border text-sm font-medium text-gray-700 shadow-sm"><i class="fas fa-shower text-yellow-600 mr-1"></i> Instant Shower</div>
+        </div>
+        <div class="text-center mt-6">
+          <a href="#" class="inline-block bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-semibold px-8 py-2.5 rounded-full shadow-md transition">View All Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= WHY CHOOSE US ======= -->
+    <section class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-8">
+          <span class="section-badge"><i class="fas fa-star mr-1"></i> WHY CHOOSE US</span>
+          <h2 class="text-3xl font-extrabold text-gray-800">Reliable Repairs, Every Single Time</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-blue-50 p-6 rounded-2xl text-center border border-blue-100">
+            <i class="fas fa-rocket text-3xl text-yellow-600"></i>
+            <h4 class="font-bold text-gray-800 mt-2">Fast Response</h4>
+            <p class="text-sm text-gray-600">Same-day repair for most appliance issues.</p>
+          </div>
+          <div class="bg-green-50 p-6 rounded-2xl text-center border border-green-100">
+            <i class="fas fa-user-graduate text-3xl text-yellow-600"></i>
+            <h4 class="font-bold text-gray-800 mt-2">Expert Technicians</h4>
+            <p class="text-sm text-gray-600">Certified engineers with 7+ years experience.</p>
+          </div>
+          <div class="bg-yellow-50 p-6 rounded-2xl text-center border border-yellow-100">
+            <i class="fas fa-coins text-3xl text-yellow-600"></i>
+            <h4 class="font-bold text-gray-800 mt-2">Transparent Pricing</h4>
+            <p class="text-sm text-gray-600">Quote before we start. No surprises.</p>
+          </div>
+          <div class="bg-purple-50 p-6 rounded-2xl text-center border border-purple-100">
+            <i class="fas fa-tools text-3xl text-yellow-600"></i>
+            <h4 class="font-bold text-gray-800 mt-2">Genuine Parts</h4>
+            <p class="text-sm text-gray-600">OEM-compatible parts for lasting repairs.</p>
+          </div>
+        </div>
+        <div class="text-center mt-8">
+          <a href="#" class="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-8 py-3 rounded-full inline-flex items-center gap-2 shadow-md transition">
+            <i class="fas fa-calendar-check"></i> Book a Technician Now
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= AREAS WE SERVE ======= -->
+    <section class="py-10 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h3 class="text-2xl font-bold text-gray-800 text-center">We Serve All Areas Across Nairobi</h3>
+        <p class="text-gray-500 text-center text-sm mt-1">Covering major estates, suburbs & business areas for on-site repair.</p>
+        <div class="flex flex-wrap justify-center gap-2 mt-6 max-w-4xl mx-auto">
+          <span class="area-chip">Westlands</span>
+          <span class="area-chip">Kilimani</span>
+          <span class="area-chip">Karen</span>
+          <span class="area-chip">Lavington</span>
+          <span class="area-chip">Kileleshwa</span>
+          <span class="area-chip">South B</span>
+          <span class="area-chip">South C</span>
+          <span class="area-chip">Langata</span>
+          <span class="area-chip">Kikuyu</span>
+          <span class="area-chip">Rongai</span>
+          <span class="area-chip">Kasarani</span>
+          <span class="area-chip">Ruaka</span>
+          <span class="area-chip">Runda</span>
+          <span class="area-chip">Muthaiga</span>
+          <span class="area-chip">Parklands</span>
+          <span class="area-chip">Eastleigh</span>
+          <span class="area-chip">Embakasi</span>
+          <span class="area-chip">Donholm</span>
+          <span class="area-chip">Buruburu</span>
+          <span class="area-chip">Umoja</span>
+          <span class="area-chip">Githurai</span>
+          <span class="area-chip">Zimmerman</span>
+          <span class="area-chip">Roysambu</span>
+          <span class="area-chip">Kahawa</span>
+          <span class="area-chip">Ruiru</span>
+          <span class="area-chip">Thika Road</span>
+          <span class="area-chip">Ngong Road</span>
+          <span class="area-chip">Mombasa Road</span>
+          <span class="area-chip">Gigiri</span>
+          <span class="area-chip">Upperhill</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= CONTACT / BOOK ======= -->
+    <section class="py-12 bg-white">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="bg-gray-50 p-6 md:p-10 rounded-3xl border border-gray-200 shadow-sm">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <span class="section-badge"><i class="fas fa-pencil-alt mr-1"></i> Book a Repair</span>
+              <h3 class="text-2xl font-extrabold text-gray-800 mt-1">Get a Free Quote</h3>
+              <p class="text-gray-600 text-sm">Contact us for a free assessment. We'll diagnose and give an honest quote.</p>
+              <div class="mt-5 space-y-3 text-gray-700">
+                <div><i class="fas fa-map-pin text-yellow-600 w-6"></i> Mugi Road, Nairobi, KE</div>
+                <div><i class="fas fa-phone-alt text-yellow-600 w-6"></i> 0768 201 855</div>
+                <div><i class="fas fa-envelope text-yellow-600 w-6"></i> info@rapidfixkenya.co.ke</div>
+                <div><i class="fas fa-clock text-yellow-600 w-6"></i> Mon–Sat: 8:00am – 6:00pm</div>
+              </div>
+              <div class="flex flex-wrap gap-3 mt-5">
+                <a href="tel:0768201855" class="call-btn text-white px-6 py-2.5 rounded-full flex items-center gap-2 shadow"><i class="fas fa-phone-alt"></i> Call Now</a>
+                <a href="https://wa.me/254768201855" target="_blank" class="whatsapp-btn text-white px-6 py-2.5 rounded-full flex items-center gap-2 shadow"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+              </div>
+            </div>
+            <!-- form placeholder -->
+            <div class="bg-white p-5 rounded-2xl shadow-inner border">
+              <h4 class="font-bold text-gray-700">Send Us a Message</h4>
+              <div class="mt-3 space-y-3">
+                <input type="text" placeholder="Your Name" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm" />
+                <input type="text" placeholder="Phone Number" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm" />
+                <select class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+                  <option>Select appliance type...</option>
+                  <option>TV</option><option>Washing Machine</option><option>Fridge</option>
+                </select>
+                <input type="text" placeholder="Your Location in Nairobi" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm" />
+                <button class="bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-semibold w-full py-2.5 rounded-xl shadow transition">Send Message</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= BLOG / LATEST NEWS ======= -->
+    <section class="py-10 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h3 class="text-2xl font-bold text-gray-800">Latest Repair Tips & News</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+          <div class="bg-white p-4 rounded-2xl border shadow-sm hover:shadow-md transition">
+            <div class="text-xs font-semibold text-yellow-700 bg-yellow-50 px-2 py-0.5 rounded-full inline-block">ELECTRONICS</div>
+            <h4 class="font-bold text-gray-800 mt-1 text-sm">Lower Kabete Washing Machine Repair | 0729208276</h4>
+            <p class="text-xs text-gray-400">Jun 12, 2026 · 4 min read</p>
+            <p class="text-xs text-gray-500 mt-1">Common faults, timely repairs & service explained.</p>
+            <a href="#" class="text-yellow-600 text-xs font-semibold mt-2 inline-block">Read Article →</a>
+          </div>
+          <div class="bg-white p-4 rounded-2xl border shadow-sm hover:shadow-md transition">
+            <div class="text-xs font-semibold text-yellow-700 bg-yellow-50 px-2 py-0.5 rounded-full inline-block">ELECTRONICS</div>
+            <h4 class="font-bold text-gray-800 mt-1 text-sm">Nyarai Washing Machine Repair | 0729208276</h4>
+            <p class="text-xs text-gray-400">Jun 12, 2026 · 4 min read</p>
+            <p class="text-xs text-gray-500 mt-1">Common faults, timely repairs & service explained.</p>
+            <a href="#" class="text-yellow-600 text-xs font-semibold mt-2 inline-block">Read Article →</a>
+          </div>
+          <div class="bg-white p-4 rounded-2xl border shadow-sm hover:shadow-md transition">
+            <div class="text-xs font-semibold text-yellow-700 bg-yellow-50 px-2 py-0.5 rounded-full inline-block">ELECTRONICS</div>
+            <h4 class="font-bold text-gray-800 mt-1 text-sm">Westlands Washing Machine Repair | 0729208276</h4>
+            <p class="text-xs text-gray-400">Jun 12, 2026 · 4 min read</p>
+            <p class="text-xs text-gray-500 mt-1">Common faults, timely repairs & service explained.</p>
+            <a href="#" class="text-yellow-600 text-xs font-semibold mt-2 inline-block">Read Article →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======= FOOTER ======= -->
+  <footer class="bg-gray-900 text-gray-300 pt-12 pb-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center gap-2">
+            <div class="logo-badge w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm"><i class="fas fa-bolt"></i></div>
+            <span class="text-white font-extrabold text-xl">RapidFix Kenya</span>
+          </div>
+          <p class="text-sm text-gray-400 mt-2">Professional electronics and home appliance repair in Nairobi, Kenya. Fast, affordable, and reliable.</p>
+        </div>
+        <div>
+          <h5 class="text-white font-semibold">SERVICES</h5>
+          <ul class="text-sm space-y-1 mt-2">
+            <li>TV Repair Nairobi</li><li>Washing Machine Repair</li><li>Fridge Repair</li><li>Microwave Repair</li><li>Cooker Repair</li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="text-white font-semibold">QUICK LINKS</h5>
+          <ul class="text-sm space-y-1 mt-2">
+            <li><a href="#">About Us</a></li><li><a href="#">All Services</a></li><li><a href="#">Blog</a></li><li><a href="#">Reviews</a></li><li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="text-white font-semibold">CONTACT</h5>
+          <ul class="text-sm space-y-1 mt-2">
+            <li><i class="fas fa-phone-alt mr-1"></i> 0768 201 855</li>
+            <li><i class="fas fa-envelope mr-1"></i> info@rapidfixkenya.co.ke</li>
+            <li><i class="fas fa-map-pin mr-1"></i> Mugi Rd, Nairobi</li>
+            <li><i class="fas fa-clock mr-1"></i> Mon–Sat: 8am–6pm</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-8 pt-6 text-center text-sm text-gray-500">
+        © 2026 RapidFix Kenya. All rights reserved. Built for rapidfixkenya.co.ke
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
