@@ -79,17 +79,156 @@
       letter-spacing: -0.5px;
     }
   </style>
+  <script>
+    function openBookingModal() {
+      document.getElementById('bookingModal').classList.remove('hidden');
+      document.getElementById('bookingModal').classList.add('flex');
+    }
+    function closeBookingModal() {
+      document.getElementById('bookingModal').classList.add('hidden');
+      document.getElementById('bookingModal').classList.remove('flex');
+    }
+    function updateTowns() {
+      const county = document.getElementById('countySelect').value;
+      const townSelect = document.getElementById('townSelect');
+      const towns = {
+        "Mombasa": ["Mombasa Town", "Likoni", "Changamwe", "Kisauni", "Nyali", "Jomvu"],
+        "Kwale": ["Kwale Town", "Msambweni", "Lunga Lunga", "Chasimba", "Kiongwani"],
+        "Kilifi": ["Kilifi Town", "Malindi", "Watamu", "Mambrui", "Kaloleni"],
+        "Tana River": ["Hola", "Garsen", "Witu", "Kipini"],
+        "Lamu": ["Lamu Town", "Faza", "Kiunga"],
+        "Taita-Taveta": ["Voi", "Taveta", "Wundanyi", "Mwatate"],
+        "Garissa": ["Garissa Town", "Balambala", "Dadaab", "Madogo"],
+        "Wajir": ["Wajir Town", "Habaswein", "Griftlagh", "Ladghah", "Buna"],
+        "Mandera": ["Mandera Town", "Banissa", "Lalole", "Rhamu", "Takaba"],
+        "Marsabit": ["Marsabit Town", "Isolo", "Moyale", "Laisamis", "Dukana"],
+        "Isiolo": ["Isiolo Town", "Kinna", "Oldonyiro"],
+        "Meru": ["Meru Town", "Maua", "Nkubu", "Tigania", "Igoji"],
+        "Tharaka-Nithi": ["Chuka", "Marimanti", "Katharaka", "Gatunga"],
+        "Embu": ["Embu Town", "Runyenjes", "Manyatta", "Kiritiri"],
+        "Kitui": ["Kitui Town", "Mwingi", "Mutomo", "Kibwezi", "Ikutha"],
+        "Machakos": ["Machakos Town", "Athi River", "Kangundo", "Tala", "Mwala"],
+        "Makueni": ["Wote", "Makindu", "Kibwezi", "Emali"],
+        "Nyandarua": ["Ol Kalou", "Engineer"],
+        "Nyeri": ["Nyeri Town", "Karatina", "Othaya", "Mukurweini"],
+        "Kirinyaga": ["Kerugoya", "Sagana", "Baricho", "Wanguru"],
+        "Murang'a": ["Murang'a Town", "Kiharu", "Kangema", "Mathioya", "Kigumo"],
+        "Kiambu": ["Kiambu Town", "Thika", "Juja", "Ruiru", "Githurai", "Kikuyu", "Limuru", "Lari", "Kabete", "Gatundu"],
+        "Turkana": ["Lodwar", "Kakuma", "Lokichogom", "Lokitaung"],
+        "West Pokot": ["Kapenguria", "Chepareria", "Lelan"],
+        "Samburu": ["Samburu", "Maralal", "Baragoi", "South Horr", "North Horr"],
+        "Trans-Nzoia": ["Kitale", "Endebess", "Kiminini", "Saboti"],
+        "Uasin Gishu": ["Eldoret", "Turbo", "Ainabkoi", "Moiben", "Kesses"],
+        "Elgeyo-Marakwet": ["Itebei", "Kapsowar", "Cheptuyek", "Kapyego"],
+        "Nandi": ["Kapsabet", "Nandi Hills", "Chemelil", "Kabiyet", "Lessos"],
+        "Baringo": ["Kabarnet", "Eldama Ravine", "Marigat", "Kiptagich", "Saimo"],
+        "Laikipia": ["Nanyuki", "Rumuruti", "Ol Moran", "Kimberly"],
+        "Nakuru": ["Nakuru Town", "Naivasha", "Gilgil", "Molo", "Njoro", "Olenguruone"],
+        "Narok": ["Narok Town", "Kilgoris", "Sultan", "Mosiro"],
+        "Kajiado": ["Kajiado Town", "Ngong", "Kitengela", "Isinya", "Namanga"],
+        "Kericho": ["Kericho Town", "Kapkatet", "Chepnganget", "Londiani"],
+        "Bomet": ["Bomet Town", "Sotik", "Mutarakwa", "Kaplong"],
+        "Kakamega": ["Kakamega Town", "Mumias", "Malava", "Navakholo", "Butere"],
+        "Vihiga": ["Vihiga Town", "Mbale", "Luanda", "Hamisi", "Chavakali"],
+        "Bungoma": ["Bungoma Town", "Webuye", "Kimilili", "Chwele", "Sirisia"],
+        "Busia": ["Busia Town", "Malaba", "Port Victoria", "Nambale", "Sio"],
+        "Siaya": ["Siaya Town", "Bondo", "Gem", "Ugunja", "Yala"],
+        "Kisumu": ["Kisumu City", "Maseno", "Ahero", "Muhoroni", "Kombewa"],
+        "Homa Bay": ["Homa Bay Town", "Kendu Bay", "Oyugis", "Rangwe", "Mbita"],
+        "Migori": ["Migori Town", "Awendo", "Rongo", "Kuria", "Ntimaru"],
+        "Kisii": ["Kisii Town", "Ogembo", "Bomachoge"],
+        "Nyamira": ["Nyamira Town", "Manga", "Gichiche"],
+        "Nairobi": ["Nairobi CBD", "Westlands", "Kilimani", "Karen", "Kasarani", "Embakasi", "South B", "South C", "Langata", "Kileleshwa", "Lavington", "Ruaka", "Roysambu"]
+      };
+      townSelect.innerHTML = '<option value="">Select Town/City...</option>';
+      if (towns[county]) {
+        towns[county].forEach(town => {
+          const opt = document.createElement('option');
+          opt.value = town;
+          opt.textContent = town;
+          townSelect.appendChild(opt);
+        });
+      }
+    }
+    function validateForm(event) {
+      const form = event.target;
+      const requiredFields = form.querySelectorAll('[required]');
+      let valid = true;
+      requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+          valid = false;
+          field.classList.add('border-red-400');
+        } else {
+          field.classList.remove('border-red-400');
+        }
+      });
+      if (!valid) {
+        event.preventDefault();
+        alert('Please fill in all required fields.');
+      }
+      return valid;
+    }
+  </script>
 </head>
 
-<!-- Fallback Configuration: Add ?fallback=true to URL to redirect to coming-soon.html -->
-<script>
-  // Redirect to fallback page if ?fallback=true in URL
-  if (new URLSearchParams(window.location.search).get('fallback') === 'true') {
-    window.location.replace('coming-soon.html');
-  }
-</script>
-
 <body>
+  <!-- Booking Modal -->
+  <div id="bookingModal" class="hidden fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-50 p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center p-5 border-b">
+        <h3 class="text-xl font-bold text-gray-800">Book a Technician</h3>
+        <button onclick="closeBookingModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+      </div>
+      <form id="bookingForm" action="https://formsubmit.co/gotjames199@gmail.com" method="POST" onsubmit="return validateForm(event)">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="New Booking Request from RapidFix Kenya">
+        <input type="hidden" name="_template" value="table">
+        <div class="p-5 space-y-3">
+          <input type="text" name="name" placeholder="Your Name" required class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+          <input type="text" name="phone" placeholder="Phone Number" required class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+          <select name="appliance" required class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+            <option value="">Select appliance type...</option>
+            <option>TV</option><option>Washing Machine</option><option>Fridge</option>
+            <option>Cooker</option><option>Microwave</option><option>Home Theatre</option>
+            <option>Tumble Dryer</option><option>Water Dispenser</option><option>Dishwasher</option>
+            <option>Vacuum Cleaner</option><option>Water Pump</option><option>Instant Shower</option>
+          </select>
+          <select name="county" id="countySelect" required onchange="updateTowns()" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+            <option value="">Select County...</option>
+            <option>Mombasa</option><option>Kwale</option><option>Kilifi</option>
+            <option>Tana River</option><option>Lamu</option><option>Taita-Taveta</option>
+            <option>Garissa</option><option>Wajir</option><option>Mandera</option>
+            <option>Marsabit</option><option>Isiolo</option><option>Meru</option>
+            <option>Tharaka-Nithi</option><option>Embu</option><option>Kitui</option>
+            <option>Machakos</option><option>Makueni</option><option>Nyandarua</option>
+            <option>Nyeri</option><option>Kirinyaga</option><option>Murang'a</option>
+            <option>Kiambu</option><option>Turkana</option><option>West Pokot</option>
+            <option>Samburu</option><option>Trans-Nzoia</option><option>Uasin Gishu</option>
+            <option>Elgeyo-Marakwet</option><option>Nandi</option><option>Baringo</option>
+            <option>Laikipia</option><option>Nakuru</option><option>Narok</option>
+            <option>Kajiado</option><option>Kericho</option><option>Bomet</option>
+            <option>Kakamega</option><option>Vihiga</option><option>Bungoma</option>
+            <option>Busia</option><option>Siaya</option><option>Kisumu</option>
+            <option>Homa Bay</option><option>Migori</option><option>Kisii</option>
+            <option>Nyamira</option><option>Nairobi</option>
+          </select>
+          <select name="town" id="townSelect" required class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+            <option value="">Select Town/City...</option>
+          </select>
+          <input type="text" name="precise_location" placeholder="Precise Location / Estate / Street" required class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
+          <textarea name="description" placeholder="Problem description (Optional)" rows="3" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm"></textarea>
+          <button type="submit" class="bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-semibold w-full py-2.5 rounded-xl shadow transition">Send Message</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Fallback Configuration: Add ?fallback=true to URL to redirect to coming-soon.html -->
+  <script>
+    // Redirect to fallback page if ?fallback=true in URL
+    if (new URLSearchParams(window.location.search).get('fallback') === 'true') {
+      window.location.replace('coming-soon.html');
+    }
+  </script>
   <header class="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-30">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between">
       <!-- Logo + brand -->
@@ -307,9 +446,9 @@
           </div>
         </div>
         <div class="text-center mt-8">
-          <a href="#" class="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-8 py-3 rounded-full inline-flex items-center gap-2 shadow-md transition">
+          <button onclick="openBookingModal()" class="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-8 py-3 rounded-full inline-flex items-center gap-2 shadow-md transition">
             <i class="fas fa-calendar-check"></i> Book a Technician Now
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -374,19 +513,12 @@
                 <a href="https://wa.me/254768201855" target="_blank" class="whatsapp-btn text-white px-6 py-2.5 rounded-full flex items-center gap-2 shadow"><i class="fab fa-whatsapp"></i> WhatsApp</a>
               </div>
             </div>
-            <!-- form placeholder -->
-            <div class="bg-white p-5 rounded-2xl shadow-inner border">
-              <h4 class="font-bold text-gray-700">Send Us a Message</h4>
-              <div class="mt-3 space-y-3">
-                <input type="text" placeholder="Your Name" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm" />
-                <input type="text" placeholder="Phone Number" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm" />
-                <select class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm">
-                  <option>Select appliance type...</option>
-                  <option>TV</option><option>Washing Machine</option><option>Fridge</option>
-                </select>
-                <input type="text" placeholder="Your Location in Kenya" class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm" />
-                <button class="bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-semibold w-full py-2.5 rounded-xl shadow transition">Send Message</button>
-              </div>
+            <!-- contact button -->
+            <div class="bg-white p-5 rounded-2xl shadow-inner border flex flex-col items-center justify-center">
+              <h4 class="font-bold text-gray-700 mb-4">Send Us a Message</h4>
+              <button onclick="openBookingModal()" class="bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-semibold px-6 py-3 rounded-xl shadow transition flex items-center gap-2">
+                <i class="fas fa-envelope"></i> Open Booking Form
+              </button>
             </div>
           </div>
         </div>
