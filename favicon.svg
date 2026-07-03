@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74 74">
+  <rect width="74" height="74" rx="20" fill="#132847"/>
+  <text x="50%" y="54" font-family="Inter, Arial, sans-serif" font-size="46" font-weight="900" font-style="italic" text-anchor="middle" fill="white">R</text>
+  <text x="68%" y="54" font-family="Inter, Arial, sans-serif" font-size="46" font-weight="900" font-style="italic" text-anchor="middle" fill="#F5B400">F</text>
+  <rect x="14" y="59" width="16" height="4" rx="2" fill="#F5B400" transform="skewX(-18)"/>
+</svg>

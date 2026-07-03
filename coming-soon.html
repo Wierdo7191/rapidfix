@@ -6,7 +6,8 @@
   <title>Coming Soon | RapidFix Kenya</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <style>
     body { font-family: 'Inter', sans-serif; }
     .hero-gradient {
@@ -32,6 +33,38 @@
       background: #1f3a5f;
       transform: scale(1.02);
     }
+
+    .rf-logo { display:flex; align-items:center; gap:18px; }
+    .rf-logo-icon { background:#132847; border-radius:20px; display:flex; justify-content:center; align-items:center; position:relative; overflow:hidden; box-shadow:0 10px 30px rgba(19,40,71,.15); }
+    .rf-logo-icon::after { content:""; position:absolute; left:14px; bottom:15px; width:16px; height:4px; background:#F5B400; border-radius:4px; box-shadow:0 8px #F5B400,0 16px #F5B400; transform:skewX(-18deg); }
+    .rf { font-weight:900; font-style:italic; line-height:1; letter-spacing:-4px; }
+    .rf .r { color:white; }
+    .rf .f { color:#F5B400; }
+    .rf-wordmark { display:flex; align-items:center; gap:14px; }
+    .rf-brand { display:flex; align-items:flex-end; gap:10px; font-weight:900; line-height:.9; letter-spacing:-3px; font-style:italic; }
+    .rf-brand .rapid { color:#132847; }
+    .rf-brand .fix { color:#F5B400; }
+    .rf-country { background:#FFF6DB; color:#132847; border-radius:999px; font-weight:700; }
+
+    .rf-logo .rf { font-size:46px; }
+    .rf-logo .rf-brand { font-size:58px; }
+    .rf-logo .rf-country { padding:10px 20px; font-size:22px; }
+
+    .rf-logo-sm .rf-logo-icon { width:40px; height:40px; }
+    .rf-logo-sm .rf-logo-icon::after { left:8px; bottom:8px; width:10px; height:3px; box-shadow:0 5px #F5B400,0 10px #F5B400; }
+    .rf-logo-sm .rf { font-size:26px; letter-spacing:-2px; }
+    .rf-logo-sm .rf-brand { font-size:28px; letter-spacing:-2px; gap:8px; }
+    .rf-logo-sm .rf-country { padding:4px 12px; font-size:14px; }
+    .rf-logo-sm { gap:14px; }
+    .rf-logo-sm .rf-wordmark { gap:10px; }
+
+    .rf-logo-xs .rf-logo-icon { width:32px; height:32px; border-radius:10px; }
+    .rf-logo-xs .rf-logo-icon::after { left:6px; bottom:6px; width:8px; height:2px; box-shadow:0 4px #F5B400,0 8px #F5B400; }
+    .rf-logo-xs .rf { font-size:20px; letter-spacing:-1px; }
+    .rf-logo-xs .rf-brand { font-size:22px; letter-spacing:-1px; gap:6px; }
+    .rf-logo-xs .rf-country { padding:3px 10px; font-size:12px; }
+    .rf-logo-xs { gap:10px; }
+    .rf-logo-xs .rf-wordmark { gap:8px; }
   </style>
 </head>
 <body>
@@ -39,13 +72,13 @@
   <!-- ======= HEADER / NAV ======= -->
   <header class="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-30">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between">
-      <div class="flex items-center gap-2">
-        <div class="logo-badge w-10 h-10 rounded-xl flex items-center justify-center text-white text-xl">
-          <i class="fas fa-bolt"></i>
+      <div class="rf-logo rf-logo-sm">
+        <div class="rf-logo-icon">
+          <div class="rf"><span class="r">R</span><span class="f">F</span></div>
         </div>
-        <div>
-          <span class="logo-text text-2xl text-gray-800" style="font-weight:800;letter-spacing:-0.5px;">RapidFix</span>
-          <span class="text-sm font-semibold text-yellow-600 bg-yellow-50 px-2 py-0.5 rounded-full ml-1">Kenya</span>
+        <div class="rf-wordmark">
+          <div class="rf-brand"><span class="rapid">RAPID</span><span class="fix">FIX</span></div>
+          <span class="rf-country">Kenya</span>
         </div>
       </div>
       <div class="flex items-center gap-2 sm:gap-3">
@@ -66,8 +99,16 @@
     <!-- ======= COMING SOON ======= -->
     <section class="hero-gradient text-white min-h-[80vh] flex items-center justify-center py-20">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-        <div class="logo-badge w-20 h-20 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto mb-8">
-          <i class="fas fa-bolt"></i>
+        <div class="mx-auto mb-8" style="width:fit-content;">
+          <div class="rf-logo">
+            <div class="rf-logo-icon">
+              <div class="rf"><span class="r">R</span><span class="f">F</span></div>
+            </div>
+            <div class="rf-wordmark">
+              <div class="rf-brand"><span class="rapid">RAPID</span><span class="fix">FIX</span></div>
+              <span class="rf-country">Kenya</span>
+            </div>
+          </div>
         </div>
         <h1 class="text-4xl sm:text-6xl font-extrabold leading-tight mb-4">
           Coming <span class="text-yellow-300">Soon</span>
@@ -94,9 +135,14 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         <div>
-          <div class="flex items-center gap-2">
-            <div class="logo-badge w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm"><i class="fas fa-bolt"></i></div>
-            <span class="text-white font-extrabold text-xl">RapidFix Kenya</span>
+          <div class="rf-logo rf-logo-xs">
+            <div class="rf-logo-icon">
+              <div class="rf"><span class="r">R</span><span class="f">F</span></div>
+            </div>
+            <div class="rf-wordmark">
+              <div class="rf-brand"><span class="rapid">RAPID</span><span class="fix">FIX</span></div>
+              <span class="rf-country">Kenya</span>
+            </div>
           </div>
           <p class="text-sm text-gray-400 mt-2">Professional electronics and home appliance repair in Kenya. Fast, affordable, and reliable.</p>
         </div>
