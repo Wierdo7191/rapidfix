@@ -244,20 +244,20 @@ function validateForm(event) {
        }
        return valid;
      }
-// Brand slideshow infinite scroll
-      document.addEventListener('DOMContentLoaded', function() {
-        const track = document.getElementById('brandTrack');
-        // Hero background slideshow
-        const slides = document.querySelectorAll('.hero-slide');
-        let currentSlide = 0;
-        function showNextSlide() {
-          slides[currentSlide].classList.remove('active');
-          currentSlide = (currentSlide + 1) % slides.length;
-          slides[currentSlide].classList.add('active');
-        }
-        setInterval(showNextSlide, 5000);
-      })
-   </script>
+     // Brand slideshow infinite scroll
+     document.addEventListener('DOMContentLoaded', function() {
+       const track = document.getElementById('brandTrack');
+       // Hero background slideshow
+       const slides = document.querySelectorAll('.hero-slide');
+       let currentSlide = 0;
+       function showNextSlide() {
+         slides[currentSlide].classList.remove('active');
+         currentSlide = (currentSlide + 1) % slides.length;
+         slides[currentSlide].classList.add('active');
+       }
+       setInterval(showNextSlide, 4000);
+     });
+    </script>
 </head>
 
 <body>
