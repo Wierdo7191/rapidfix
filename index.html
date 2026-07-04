@@ -16,27 +16,30 @@
     .hero-gradient {
       background: linear-gradient(145deg, #0b1a33 0%, #142b4a 100%);
     }
-    .hero-slideshow {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .hero-slide {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-    }
-    .hero-slide.active {
-      opacity: 1;
-    }
+.hero-slideshow {
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       overflow: hidden;
+       z-index: 0;
+     }
+     .hero-slide {
+       position: absolute;
+       inset: 0;
+       background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
+       opacity: 0;
+       transition: opacity 1.5s ease-in-out;
+     }
+     .hero-slide.active {
+       opacity: 1;
+     }
+     .hero-section {
+       min-height: 500px;
+     }
     .logo-badge {
       background: linear-gradient(135deg, #f59e0b, #d97706);
       box-shadow: 0 8px 20px -6px rgba(245, 158, 11, 0.3);
@@ -345,7 +348,7 @@ function validateForm(event) {
   <main>
 
     <!-- ======= HERO + COVER PHOTO ======= -->
-    <section class="hero-gradient text-white py-10 md:py-16 relative overflow-hidden">
+    <section class="hero-gradient hero-section text-white py-10 md:py-16 relative overflow-hidden">
       <div class="hero-slideshow" id="heroSlideshow">
         <div class="hero-slide active" style="background-image: url('Images/microcave-back.jfif');"></div>
         <div class="hero-slide" style="background-image: url('Images/microcave.png');"></div>
