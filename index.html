@@ -16,6 +16,27 @@
     .hero-gradient {
       background: linear-gradient(145deg, #0b1a33 0%, #142b4a 100%);
     }
+    .hero-slideshow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    .hero-slide.active {
+      opacity: 1;
+    }
     .logo-badge {
       background: linear-gradient(135deg, #f59e0b, #d97706);
       box-shadow: 0 8px 20px -6px rgba(245, 158, 11, 0.3);
@@ -223,10 +244,19 @@ function validateForm(event) {
        }
        return valid;
      }
-      // Brand slideshow infinite scroll
-     document.addEventListener('DOMContentLoaded', function() {
-       const track = document.getElementById('brandTrack');
-     })
+// Brand slideshow infinite scroll
+      document.addEventListener('DOMContentLoaded', function() {
+        const track = document.getElementById('brandTrack');
+        // Hero background slideshow
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+        function showNextSlide() {
+          slides[currentSlide].classList.remove('active');
+          currentSlide = (currentSlide + 1) % slides.length;
+          slides[currentSlide].classList.add('active');
+        }
+        setInterval(showNextSlide, 5000);
+      })
    </script>
 </head>
 
@@ -315,8 +345,21 @@ function validateForm(event) {
   <main>
 
     <!-- ======= HERO + COVER PHOTO ======= -->
-    <section class="hero-gradient text-white py-10 md:py-16">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <section class="hero-gradient text-white py-10 md:py-16 relative overflow-hidden">
+      <div class="hero-slideshow" id="heroSlideshow">
+        <div class="hero-slide active" style="background-image: url('Images/microcave-back.jfif');"></div>
+        <div class="hero-slide" style="background-image: url('Images/microcave.png');"></div>
+        <div class="hero-slide" style="background-image: url('Images/ramtons-fridge-open.png');"></div>
+        <div class="hero-slide" style="background-image: url('Images/ramtons-fridge.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('Images/pressure-cooker.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('Images/tv-remote-control.jfif');"></div>
+        <div class="hero-slide" style="background-image: url('Images/vision-plus-tvpov.webp');"></div>
+        <div class="hero-slide" style="background-image: url('Images/vision-two-speaker-sound-system.webp');"></div>
+        <div class="hero-slide" style="background-image: url('Images/water-dispenser.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('Images/washing-machine-wash-only.jpg');"></div>
+      </div>
+      <div class="absolute inset-0 bg-black/50 z-1"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 z-2 relative">
         <div class="flex flex-col md:flex-row items-center justify-between gap-8">
           <!-- left hero text -->
           <div class="md:w-3/5">
