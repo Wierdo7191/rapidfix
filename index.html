@@ -110,7 +110,29 @@
     .rf-logo-xs .rf-brand { font-size:22px; letter-spacing:-1px; gap:0; }
     .rf-logo-xs .rf-country { padding:3px 10px; font-size:12px; }
     .rf-logo-xs { gap:10px; }
-    .rf-logo-xs .rf-wordmark { gap:8px; }
+.rf-logo-xs .rf-wordmark { gap:8px; }
+
+    .brand-slideshow {
+      mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    }
+    .brand-track {
+      animation: scroll-right 30s linear infinite;
+      white-space: nowrap;
+    }
+    .brand-track:hover {
+      animation-play-state: paused;
+    }
+    .brand-logo {
+      transition: all 0.3s;
+    }
+    .brand-logo:hover {
+      transform: scale(1.1);
+    }
+    @keyframes scroll-right {
+      0% { transform: translateX(calc(-50%)); }
+      100% { transform: translateX(0); }
+    }
   </style>
   <script>
     function openBookingModal() {
@@ -183,25 +205,29 @@
         });
       }
     }
-    function validateForm(event) {
-      const form = event.target;
-      const requiredFields = form.querySelectorAll('[required]');
-      let valid = true;
-      requiredFields.forEach(field => {
-        if (!field.value.trim()) {
-          valid = false;
-          field.classList.add('border-red-400');
-        } else {
-          field.classList.remove('border-red-400');
-        }
-      });
-      if (!valid) {
-        event.preventDefault();
-        alert('Please fill in all required fields.');
-      }
-      return valid;
-    }
-  </script>
+function validateForm(event) {
+       const form = event.target;
+       const requiredFields = form.querySelectorAll('[required]');
+       let valid = true;
+       requiredFields.forEach(field => {
+         if (!field.value.trim()) {
+           valid = false;
+           field.classList.add('border-red-400');
+         } else {
+           field.classList.remove('border-red-400');
+         }
+       });
+       if (!valid) {
+         event.preventDefault();
+         alert('Please fill in all required fields.');
+       }
+       return valid;
+     }
+      // Brand slideshow infinite scroll
+     document.addEventListener('DOMContentLoaded', function() {
+       const track = document.getElementById('brandTrack');
+     })
+   </script>
 </head>
 
 <body>
@@ -486,42 +512,92 @@
       </div>
     </section>
 
-    <!-- ======= AREAS WE SERVE ======= -->
-    <section class="py-10 bg-gray-50">
+    <!-- ======= BRANDS WE SERVICE ======= -->
+    <section class="py-12 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <h3 class="text-2xl font-bold text-gray-800 text-center">We Serve All Areas Across Kenya</h3>
-        <p class="text-gray-500 text-center text-sm mt-1">Covering major estates, suburbs & business areas for on-site repair.</p>
-        <div class="flex flex-wrap justify-center gap-2 mt-6 max-w-4xl mx-auto">
-          <span class="area-chip">Westlands</span>
-          <span class="area-chip">Kilimani</span>
-          <span class="area-chip">Karen</span>
-          <span class="area-chip">Lavington</span>
-          <span class="area-chip">Kileleshwa</span>
-          <span class="area-chip">South B</span>
-          <span class="area-chip">South C</span>
-          <span class="area-chip">Langata</span>
-          <span class="area-chip">Kikuyu</span>
-          <span class="area-chip">Rongai</span>
-          <span class="area-chip">Kasarani</span>
-          <span class="area-chip">Ruaka</span>
-          <span class="area-chip">Runda</span>
-          <span class="area-chip">Muthaiga</span>
-          <span class="area-chip">Parklands</span>
-          <span class="area-chip">Eastleigh</span>
-          <span class="area-chip">Embakasi</span>
-          <span class="area-chip">Donholm</span>
-          <span class="area-chip">Buruburu</span>
-          <span class="area-chip">Umoja</span>
-          <span class="area-chip">Githurai</span>
-          <span class="area-chip">Zimmerman</span>
-          <span class="area-chip">Roysambu</span>
-          <span class="area-chip">Kahawa</span>
-          <span class="area-chip">Ruiru</span>
-          <span class="area-chip">Thika Road</span>
-          <span class="area-chip">Ngong Road</span>
-          <span class="area-chip">Mombasa Road</span>
-          <span class="area-chip">Gigiri</span>
-          <span class="area-chip">Upperhill</span>
+        <div class="text-center mb-8">
+          <span class="section-badge"><i class="fas fa-certificate mr-1"></i> BRANDS WE SERVICE</span>
+          <h3 class="text-3xl font-extrabold text-gray-800 mt-2">Trusted by Leading Brands</h3>
+          <p class="text-gray-500 text-sm mt-1">We repair and service products from the world's most trusted brands.</p>
+        </div>
+        <div class="brand-slideshow relative overflow-hidden" id="brandSlideshow">
+          <div class="brand-track flex items-center gap-8" id="brandTrack">
+            <img src="Images/acer.png" alt="Acer" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/albar.png" alt="Albar" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/apple.png" alt="Apple" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/ariston.png" alt="Ariston" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/asus.png" alt="Asus" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/beko.png" alt="Beko" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/blackdecker.png" alt="Black Decker" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/bruhm.png" alt="Bruhm" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/dell.png" alt="Dell" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/deloghi.png" alt="Deloghi" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/dynabook.png" alt="Dynabook" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/fujistu.png" alt="Fujitsu" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/gigabyte.png" alt="Gigabyte" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/haier.png" alt="Haier" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/hisens.png" alt="Hisens" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/honor.png" alt="Honor" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/hotpoint.png" alt="Hotpoint" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/hp.png" alt="HP" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/kenwood.png" alt="Kenwood" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/lenovo.png" alt="Lenovo" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/lg.png" alt="LG" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/mika.png" alt="Mika" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/moulinex.png" alt="Moulinex" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/msi.png" alt="MSI" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/nunix.png" alt="Nunix" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/panasonic.png" alt="Panasonic" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/philips.png" alt="Philips" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/ramtons.png" alt="Ramtons" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/razer.png" alt="Razer" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/rebune.png" alt="Rebune" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/roch.png" alt="Roch" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/russel.png" alt="Russell Hobbs" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/samsung.png" alt="Samsung" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/sayona.png" alt="Sayona" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/skyworth.png" alt="Skyworth" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/synix.png" alt="Synix" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/tcl.png" alt="TCL" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <!-- Duplicate for infinite loop -->
+            <img src="Images/acer.png" alt="Acer" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/albar.png" alt="Albar" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/apple.png" alt="Apple" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/ariston.png" alt="Ariston" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/asus.png" alt="Asus" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/beko.png" alt="Beko" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/blackdecker.png" alt="Black Decker" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/bruhm.png" alt="Bruhm" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/dell.png" alt="Dell" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/deloghi.png" alt="Deloghi" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/dynabook.png" alt="Dynabook" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/fujistu.png" alt="Fujitsu" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/gigabyte.png" alt="Gigabyte" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/haier.png" alt="Haier" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/hisens.png" alt="Hisens" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/honor.png" alt="Honor" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/hotpoint.png" alt="Hotpoint" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/hp.png" alt="HP" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/kenwood.png" alt="Kenwood" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/lenovo.png" alt="Lenovo" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/lg.png" alt="LG" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/mika.png" alt="Mika" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/moulinex.png" alt="Moulinex" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/msi.png" alt="MSI" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/nunix.png" alt="Nunix" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/panasonic.png" alt="Panasonic" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/philips.png" alt="Philips" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/ramtons.png" alt="Ramtons" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/razer.png" alt="Razer" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/rebune.png" alt="Rebune" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/roch.png" alt="Roch" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/russel.png" alt="Russell Hobbs" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/samsung.png" alt="Samsung" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/sayona.png" alt="Sayona" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/skyworth.png" alt="Skyworth" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/synix.png" alt="Synix" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/tcl.png" alt="TCL" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+          </div>
         </div>
       </div>
     </section>
