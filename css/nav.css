@@ -11,6 +11,33 @@
   color: #d97706;
   border-bottom-color: #f5b400;
 }
+/* Desktop top horizontal nav (above the logo row) */
+.nav-link-top {
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  position: relative;
+  transition: color 0.15s;
+}
+.nav-link-top:hover {
+  color: #d97706;
+}
+.nav-link-top::after {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: -2px;
+  height: 2px;
+  background: #f5b400;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.15s;
+}
+.nav-link-top:hover::after {
+  transform: scaleX(1);
+}
 .nav-link-mobile {
   color: #1e293b;
   font-weight: 600;
