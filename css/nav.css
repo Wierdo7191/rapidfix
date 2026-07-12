@@ -1,0 +1,41 @@
+/* Shared header navigation styles (desktop + mobile) for RapidFix Kenya */
+.nav-link {
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.25rem 0.25rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.nav-link:hover {
+  color: #d97706;
+  border-bottom-color: #f5b400;
+}
+.nav-link-mobile {
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.6rem 0.25rem;
+  border-radius: 0.5rem;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-link-mobile:hover {
+  background: #fffbeb;
+  color: #d97706;
+}
+.call-btn {
+  background: #0b1a33;
+  transition: all 0.2s;
+}
+.call-btn:hover {
+  background: #1f3a5f;
+  transform: scale(1.02);
+}
+.whatsapp-btn {
+  background: #25D366;
+  transition: all 0.2s;
+}
+.whatsapp-btn:hover {
+  background: #1da851;
+  transform: scale(1.03);
+}

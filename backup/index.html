@@ -4,28 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RapidFix Kenya | Appliance Repair</title>
-  <meta name="description" content="RapidFix Kenya provides fast, affordable appliance repair services across Kenya. Expert repair for TVs, washing machines, fridges, cookers, microwaves, and all home appliances. Certified technicians, same-day service, 7+ years experience." />
-  <meta name="keywords" content="appliance repair Kenya, TV repair Nairobi, washing machine repair, fridge repair, microwave repair, cooker repair, home appliance repair, electronics repair Kenya, RapidFix Kenya" />
-  <link rel="canonical" href="https://rapidfixkenya.co.ke/" />
-
-  <meta property="og:title" content="RapidFix Kenya | Fast & Affordable Appliance Repair" />
-  <meta property="og:description" content="Expert appliance repair across Kenya. TVs, washing machines, fridges, cookers & more. Same-day service, certified technicians." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://rapidfixkenya.co.ke/" />
-  <meta property="og:image" content="https://rapidfixkenya.co.ke/Images/rapidfix-appliance-repair-kenya.webp" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="RapidFix Kenya | Fast & Affordable Appliance Repair" />
-  <meta name="twitter:description" content="Expert appliance repair across Kenya. TVs, washing machines, fridges, cookers & more. Same-day service." />
-
-  <!-- Precompiled Tailwind (replaces heavy in-browser CDN engine) -->
-  <link rel="stylesheet" href="/css/tailwind.min.css">
-  <!-- Resource hints: speed up third-party connections -->
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons (free) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <!-- Google Font (Inter) -->
@@ -36,6 +16,35 @@
     .hero-gradient {
       background: linear-gradient(145deg, #0b1a33 0%, #142b4a 100%);
     }
+ .hero-slideshow {
+       position: absolute;
+       inset: 0;
+       z-index: 0;
+     }
+     .hero-slide {
+       position: absolute;
+       inset: 0;
+       background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
+       opacity: 0;
+       transition: opacity 1.2s ease-in-out;
+     }
+     .hero-slide.active {
+       opacity: 1;
+     }
+     .hero-overlay,
+     .hero-content {
+       transition: opacity 1.2s ease-in-out;
+     }
+     .hero-section.render-clean .hero-overlay,
+     .hero-section.render-clean .hero-content {
+       opacity: 0;
+     }
+     .hero-section {
+       min-height: 500px;
+       overflow: hidden;
+     }
     .logo-badge {
       background: linear-gradient(135deg, #f59e0b, #d97706);
       box-shadow: 0 8px 20px -6px rgba(245, 158, 11, 0.3);
@@ -62,30 +71,6 @@
     .call-btn:hover {
       background: #1f3a5f;
       transform: scale(1.02);
-    }
-    .nav-link {
-      color: #1e293b;
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 0.25rem 0.25rem;
-      border-bottom: 2px solid transparent;
-      transition: color 0.15s, border-color 0.15s;
-    }
-    .nav-link:hover {
-      color: #d97706;
-      border-bottom-color: #f5b400;
-    }
-    .nav-link-mobile {
-      color: #1e293b;
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 0.6rem 0.25rem;
-      border-radius: 0.5rem;
-      transition: background 0.15s, color 0.15s;
-    }
-    .nav-link-mobile:hover {
-      background: #fffbeb;
-      color: #d97706;
     }
     .section-badge {
       background: #dbeafe;
@@ -118,37 +103,6 @@
       background: linear-gradient(135deg, #0b1a33 0%, #1f3a5f 100%);
       border-radius: 24px;
       padding: 2rem 2.5rem;
-      min-height: 380px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-    }
-    .cover-photo::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, rgba(3, 10, 20, 0.45) 0%, rgba(3, 10, 20, 0.18) 55%, rgba(3, 10, 20, 0.7) 100%);
-      z-index: 1;
-    }
-    .cover-photo img {
-      position: absolute;
-      inset: -6% -4% -6% auto;
-      width: 100%;
-      height: 112%;
-      max-width: 110%;
-      object-fit: cover;
-      object-position: right top;
-      z-index: 0;
-      display: block;
-      transform: scale(1.02);
-    }
-    .cover-photo-content {
-      position: relative;
-      z-index: 2;
-      max-width: 80%;
-      padding-right: 1rem;
     }
     .logo-text {
       font-weight: 800;
@@ -298,84 +252,25 @@ function validateForm(event) {
        }
        return valid;
      }
-        // Brand slideshow infinite scroll
-        document.addEventListener('DOMContentLoaded', function() {
-           const track = document.getElementById('brandTrack');
-           // Header mobile menu toggle
-            const menuToggle = document.getElementById('menuToggle');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const menuIconOpen = document.getElementById('menuIconOpen');
-            const menuIconClose = document.getElementById('menuIconClose');
-
-            function openMobileMenu() {
-              mobileMenu.classList.remove('hidden');
-              if (menuIconOpen) menuIconOpen.classList.add('hidden');
-              if (menuIconClose) menuIconClose.classList.remove('hidden');
-              menuToggle.setAttribute('aria-expanded', 'true');
-            }
-            function closeMobileMenu() {
-              mobileMenu.classList.add('hidden');
-              if (menuIconOpen) menuIconOpen.classList.remove('hidden');
-              if (menuIconClose) menuIconClose.classList.add('hidden');
-              menuToggle.setAttribute('aria-expanded', 'false');
-            }
-            function toggleMobileMenu() {
-              if (mobileMenu.classList.contains('hidden')) {
-                openMobileMenu();
-              } else {
-                closeMobileMenu();
-              }
-            }
-
-            if (menuToggle && mobileMenu) {
-              menuToggle.addEventListener('click', function(event) {
-                event.stopPropagation();
-                toggleMobileMenu();
-              });
-              mobileMenu.querySelectorAll('a').forEach(function(link) {
-                link.addEventListener('click', closeMobileMenu);
-              });
-              document.addEventListener('click', function(event) {
-                if (!mobileMenu.classList.contains('hidden') &&
-                    !mobileMenu.contains(event.target) &&
-                    !menuToggle.contains(event.target)) {
-                  closeMobileMenu();
-                }
-              });
-              document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') closeMobileMenu();
-              });
-            }
-        });
-     </script>
-     <script type="application/ld+json">
-     {
-       "@context": "https://schema.org",
-       "@type": "LocalBusiness",
-       "name": "RapidFix Kenya",
-       "description": "Fast and affordable appliance repair services across Kenya. Specializing in TV, washing machine, fridge, and home appliance repairs.",
-       "url": "https://rapidfixkenya.co.ke/",
-       "telephone": "+254768201855",
-       "email": "info@rapidfixkenya.co.ke",
-       "address": {
-         "@type": "PostalAddress",
-         "streetAddress": "Mugi Road",
-         "addressLocality": "Nairobi",
-         "addressCountry": "KE"
-       },
-       "openingHoursSpecification": {
-         "@type": "OpeningHoursSpecification",
-         "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-         "opens": "08:00",
-         "closes": "18:00"
-       },
-        "sameAs": [
-          "https://wa.me/254768201855",
-          "https://www.facebook.com/profile.php?id=61590670738460"
-        ]
-     }
-     </script>
-   </head>
+     // Brand slideshow infinite scroll
+     document.addEventListener('DOMContentLoaded', function() {
+        const track = document.getElementById('brandTrack');
+        // Hero background slideshow (slides left-to-right)
+        const heroSection = document.getElementById('heroSection');
+        // Hero background slideshow (fade, no horizontal push)
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+        function showNextSlide() {
+          slides[currentSlide].classList.remove('active');
+          currentSlide = (currentSlide + 1) % slides.length;
+          slides[currentSlide].classList.add('active');
+          const bg = slides[currentSlide].style.backgroundImage;
+          heroSection.classList.toggle('render-clean', bg.indexOf('render Image') !== -1);
+        }
+        setInterval(showNextSlide, 3000);
+     });
+    </script>
+</head>
 
 <body>
   <!-- Booking Modal -->
@@ -436,7 +331,7 @@ function validateForm(event) {
     }
   </script>
   <header class="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-30">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between">
       <!-- Logo + brand -->
       <div class="rf-logo rf-logo-sm">
         <div class="rf-logo-icon">
@@ -447,17 +342,7 @@ function validateForm(event) {
           <span class="rf-country">Kenya</span>
         </div>
       </div>
-
-      <!-- Desktop nav -->
-      <nav class="hidden md:flex items-center gap-6">
-        <a href="/pages/about.html" class="nav-link">About Us</a>
-        <a href="/services" class="nav-link">All Services</a>
-        <a href="/blog" class="nav-link">Blog</a>
-        <a href="/reviews" class="nav-link">Reviews</a>
-        <a href="/pages/contact.html" class="nav-link">Contact</a>
-      </nav>
-
-      <!-- Right: CTA + hamburger -->
+      <!-- CTA buttons (mobile friendly) -->
       <div class="flex items-center gap-2 sm:gap-3">
         <a href="tel:0768201855" class="call-btn text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 shadow-md">
           <i class="fas fa-phone-alt"></i> <span class="hidden sm:inline">Call</span> 0768 201 855
@@ -465,28 +350,29 @@ function validateForm(event) {
         <a href="https://wa.me/254768201855" target="_blank" class="whatsapp-btn text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 shadow-md">
           <i class="fab fa-whatsapp"></i> <span class="hidden sm:inline">WhatsApp</span>
         </a>
-        <button id="menuToggle" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden text-gray-700 hover:text-yellow-600 text-xl p-2 -mr-2">
-          <i class="fas fa-bars" id="menuIconOpen"></i>
-          <i class="fas fa-times hidden" id="menuIconClose"></i>
-        </button>
       </div>
     </div>
-
-    <!-- Mobile menu panel -->
-    <nav id="mobileMenu" aria-label="Mobile navigation" class="md:hidden hidden border-t border-gray-100 bg-white px-4 py-3 space-y-1">
-      <a href="/pages/about.html" class="block nav-link-mobile">About Us</a>
-      <a href="/services" class="block nav-link-mobile">All Services</a>
-      <a href="/blog" class="block nav-link-mobile">Blog</a>
-      <a href="/reviews" class="block nav-link-mobile">Reviews</a>
-      <a href="/pages/contact.html" class="block nav-link-mobile">Contact</a>
-    </nav>
   </header>
 
   <main>
 
     <!-- ======= HERO + COVER PHOTO ======= -->
-    <section class="hero-gradient text-white py-10 md:py-16">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <section id="heroSection" class="hero-gradient hero-section text-white py-10 md:py-16 relative overflow-hidden">
+      <div class="hero-slideshow" id="heroSlideshow">
+        <div class="hero-slide active" style="background-image: url('Images/microcave-back.jfif');"></div>
+        <div class="hero-slide" style="background-image: url('Images/render Image 2026-07-09 at 11.41.13.jpeg');"></div>
+        <div class="hero-slide" style="background-image: url('Images/microcave.png');"></div>
+        <div class="hero-slide" style="background-image: url('Images/ramtons-fridge-open.png');"></div>
+        <div class="hero-slide" style="background-image: url('Images/ramtons-fridge.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('Images/pressure-cooker.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('Images/tv-remote-control.jfif');"></div>
+        <div class="hero-slide" style="background-image: url('Images/vision-plus-tvpov.webp');"></div>
+        <div class="hero-slide" style="background-image: url('Images/vision-two-speaker-sound-system.webp');"></div>
+        <div class="hero-slide" style="background-image: url('Images/water-dispenser.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('Images/washing-machine-wash-only.jpg');"></div>
+      </div>
+      <div class="hero-overlay absolute inset-0 bg-black/50 z-1"></div>
+      <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 z-2 relative">
         <div class="flex flex-col md:flex-row items-center justify-between gap-8">
           <!-- left hero text -->
           <div class="md:w-3/5">
@@ -518,8 +404,7 @@ function validateForm(event) {
           <!-- COVER PHOTO (right) – visual card -->
           <div class="md:w-2/5 w-full">
             <div class="cover-photo shadow-2xl relative overflow-hidden border border-white/10">
-              <img src="human%20rapid%20Jul%2011,%202026,%2008_38_34%20PM.png" alt="RapidFix hero image" loading="eager" decoding="async" onerror="this.onerror=null;this.src='Images/render%20Image%202026-07-09%20at%2011.41.13.jpeg';" />
-              <div class="cover-photo-content flex flex-col items-start gap-1">
+              <div class="flex flex-col items-start gap-1">
                 <div class="flex items-center gap-2 text-yellow-300 text-sm font-semibold">
                   <i class="fas fa-bolt"></i> <span>RapidFix Kenya</span>
                 </div>
@@ -693,81 +578,81 @@ function validateForm(event) {
         </div>
         <div class="brand-slideshow relative overflow-hidden" id="brandSlideshow">
           <div class="brand-track flex items-center gap-8" id="brandTrack">
-            <img src="Images/acer.png" alt="Acer" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/albar.png" alt="Albar" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/apple.png" alt="Apple" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/ariston.png" alt="Ariston" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/asus.png" alt="Asus" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/beko.png" alt="Beko" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/blackdecker.png" alt="Black Decker" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/bruhm.png" alt="Bruhm" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/dell.png" alt="Dell" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/deloghi.png" alt="Deloghi" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/dynabook.png" alt="Dynabook" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/fujistu.png" alt="Fujitsu" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/gigabyte.png" alt="Gigabyte" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/haier.png" alt="Haier" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/hisens.png" alt="Hisens" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/honor.png" alt="Honor" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/hotpoint.png" alt="Hotpoint" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/hp.png" alt="HP" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/kenwood.png" alt="Kenwood" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/lenovo.png" alt="Lenovo" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/lg.png" alt="LG" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/mika.png" alt="Mika" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/moulinex.png" alt="Moulinex" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/msi.png" alt="MSI" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/nunix.png" alt="Nunix" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/panasonic.png" alt="Panasonic" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/philips.png" alt="Philips" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/ramtons.png" alt="Ramtons" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/razer.png" alt="Razer" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/rebune.png" alt="Rebune" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/roch.png" alt="Roch" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/russel.png" alt="Russell Hobbs" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/samsung.png" alt="Samsung" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/sayona.png" alt="Sayona" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/skyworth.png" alt="Skyworth" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/synix.png" alt="Synix" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/tcl.png" alt="TCL" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
+            <img src="Images/acer.png" alt="Acer" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/albar.png" alt="Albar" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/apple.png" alt="Apple" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/ariston.png" alt="Ariston" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/asus.png" alt="Asus" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/beko.png" alt="Beko" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/blackdecker.png" alt="Black Decker" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/bruhm.png" alt="Bruhm" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/dell.png" alt="Dell" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/deloghi.png" alt="Deloghi" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/dynabook.png" alt="Dynabook" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/fujistu.png" alt="Fujitsu" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/gigabyte.png" alt="Gigabyte" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/haier.png" alt="Haier" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/hisens.png" alt="Hisens" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/honor.png" alt="Honor" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/hotpoint.png" alt="Hotpoint" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/hp.png" alt="HP" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/kenwood.png" alt="Kenwood" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/lenovo.png" alt="Lenovo" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/lg.png" alt="LG" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/mika.png" alt="Mika" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/moulinex.png" alt="Moulinex" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/msi.png" alt="MSI" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/nunix.png" alt="Nunix" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/panasonic.png" alt="Panasonic" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/philips.png" alt="Philips" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/ramtons.png" alt="Ramtons" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/razer.png" alt="Razer" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/rebune.png" alt="Rebune" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/roch.png" alt="Roch" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/russel.png" alt="Russell Hobbs" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/samsung.png" alt="Samsung" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/sayona.png" alt="Sayona" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/skyworth.png" alt="Skyworth" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/synix.png" alt="Synix" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/tcl.png" alt="TCL" class="brand-logo h-12 w-auto object-contain" loading="lazy">
             <!-- Duplicate for infinite loop -->
-            <img src="Images/acer.png" alt="Acer" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/albar.png" alt="Albar" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/apple.png" alt="Apple" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/ariston.png" alt="Ariston" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/asus.png" alt="Asus" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/beko.png" alt="Beko" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/blackdecker.png" alt="Black Decker" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/bruhm.png" alt="Bruhm" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/dell.png" alt="Dell" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/deloghi.png" alt="Deloghi" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/dynabook.png" alt="Dynabook" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/fujistu.png" alt="Fujitsu" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/gigabyte.png" alt="Gigabyte" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/haier.png" alt="Haier" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/hisens.png" alt="Hisens" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/honor.png" alt="Honor" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/hotpoint.png" alt="Hotpoint" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/hp.png" alt="HP" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/kenwood.png" alt="Kenwood" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/lenovo.png" alt="Lenovo" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/lg.png" alt="LG" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/mika.png" alt="Mika" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/moulinex.png" alt="Moulinex" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/msi.png" alt="MSI" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/nunix.png" alt="Nunix" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/panasonic.png" alt="Panasonic" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/philips.png" alt="Philips" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/ramtons.png" alt="Ramtons" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/razer.png" alt="Razer" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/rebune.png" alt="Rebune" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/roch.png" alt="Roch" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/russel.png" alt="Russell Hobbs" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/samsung.png" alt="Samsung" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/sayona.png" alt="Sayona" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/skyworth.png" alt="Skyworth" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/synix.png" alt="Synix" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
-            <img src="Images/tcl.png" alt="TCL" class="brand-logo h-12 w-auto object-contain" loading="lazy" decoding="async">
+            <img src="Images/acer.png" alt="Acer" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/albar.png" alt="Albar" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/apple.png" alt="Apple" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/ariston.png" alt="Ariston" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/asus.png" alt="Asus" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/beko.png" alt="Beko" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/blackdecker.png" alt="Black Decker" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/bruhm.png" alt="Bruhm" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/dell.png" alt="Dell" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/deloghi.png" alt="Deloghi" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/dynabook.png" alt="Dynabook" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/fujistu.png" alt="Fujitsu" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/gigabyte.png" alt="Gigabyte" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/haier.png" alt="Haier" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/hisens.png" alt="Hisens" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/honor.png" alt="Honor" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/hotpoint.png" alt="Hotpoint" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/hp.png" alt="HP" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/kenwood.png" alt="Kenwood" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/lenovo.png" alt="Lenovo" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/lg.png" alt="LG" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/mika.png" alt="Mika" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/moulinex.png" alt="Moulinex" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/msi.png" alt="MSI" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/nunix.png" alt="Nunix" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/panasonic.png" alt="Panasonic" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/philips.png" alt="Philips" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/ramtons.png" alt="Ramtons" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/razer.png" alt="Razer" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/rebune.png" alt="Rebune" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/roch.png" alt="Roch" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/russel.png" alt="Russell Hobbs" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/samsung.png" alt="Samsung" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/sayona.png" alt="Sayona" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/skyworth.png" alt="Skyworth" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/synix.png" alt="Synix" class="brand-logo h-12 w-auto object-contain" loading="lazy">
+            <img src="Images/tcl.png" alt="TCL" class="brand-logo h-12 w-auto object-contain" loading="lazy">
           </div>
         </div>
       </div>
@@ -866,13 +751,12 @@ function validateForm(event) {
          </div>
         <div>
           <h5 class="text-white font-semibold">CONTACT</h5>
-            <ul class="text-sm space-y-1 mt-2">
-              <li><i class="fas fa-phone-alt mr-1"></i> 0768 201 855</li>
-              <li><i class="fas fa-envelope mr-1"></i> info@rapidfixkenya.co.ke</li>
-              <li><i class="fas fa-map-pin mr-1"></i> Mugi Rd, Kenya</li>
-              <li><i class="fas fa-clock mr-1"></i> Mon–Sat: 8am–6pm</li>
-              <li><a href="https://www.facebook.com/profile.php?id=61590670738460" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook mr-1"></i> Facebook</a></li>
-            </ul>
+          <ul class="text-sm space-y-1 mt-2">
+            <li><i class="fas fa-phone-alt mr-1"></i> 0768 201 855</li>
+            <li><i class="fas fa-envelope mr-1"></i> info@rapidfixkenya.co.ke</li>
+            <li><i class="fas fa-map-pin mr-1"></i> Mugi Rd, Kenya</li>
+            <li><i class="fas fa-clock mr-1"></i> Mon–Sat: 8am–6pm</li>
+          </ul>
         </div>
       </div>
       <div class="border-t border-gray-800 mt-8 pt-6 text-center text-sm text-gray-500">
