@@ -302,18 +302,50 @@ function validateForm(event) {
         document.addEventListener('DOMContentLoaded', function() {
            const track = document.getElementById('brandTrack');
            // Header mobile menu toggle
-           const menuToggle = document.getElementById('menuToggle');
-           const mobileMenu = document.getElementById('mobileMenu');
-           if (menuToggle && mobileMenu) {
-             menuToggle.addEventListener('click', function() {
-               mobileMenu.classList.toggle('hidden');
-             });
-             mobileMenu.querySelectorAll('a').forEach(function(link) {
-               link.addEventListener('click', function() {
-                 mobileMenu.classList.add('hidden');
-               });
-             });
-           }
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuIconOpen = document.getElementById('menuIconOpen');
+            const menuIconClose = document.getElementById('menuIconClose');
+
+            function openMobileMenu() {
+              mobileMenu.classList.remove('hidden');
+              if (menuIconOpen) menuIconOpen.classList.add('hidden');
+              if (menuIconClose) menuIconClose.classList.remove('hidden');
+              menuToggle.setAttribute('aria-expanded', 'true');
+            }
+            function closeMobileMenu() {
+              mobileMenu.classList.add('hidden');
+              if (menuIconOpen) menuIconOpen.classList.remove('hidden');
+              if (menuIconClose) menuIconClose.classList.add('hidden');
+              menuToggle.setAttribute('aria-expanded', 'false');
+            }
+            function toggleMobileMenu() {
+              if (mobileMenu.classList.contains('hidden')) {
+                openMobileMenu();
+              } else {
+                closeMobileMenu();
+              }
+            }
+
+            if (menuToggle && mobileMenu) {
+              menuToggle.addEventListener('click', function(event) {
+                event.stopPropagation();
+                toggleMobileMenu();
+              });
+              mobileMenu.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', closeMobileMenu);
+              });
+              document.addEventListener('click', function(event) {
+                if (!mobileMenu.classList.contains('hidden') &&
+                    !mobileMenu.contains(event.target) &&
+                    !menuToggle.contains(event.target)) {
+                  closeMobileMenu();
+                }
+              });
+              document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') closeMobileMenu();
+              });
+            }
         });
      </script>
      <script type="application/ld+json">
@@ -433,14 +465,15 @@ function validateForm(event) {
         <a href="https://wa.me/254768201855" target="_blank" class="whatsapp-btn text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 shadow-md">
           <i class="fab fa-whatsapp"></i> <span class="hidden sm:inline">WhatsApp</span>
         </a>
-        <button id="menuToggle" aria-label="Open menu" class="md:hidden text-gray-700 hover:text-yellow-600 text-xl p-2 -mr-2">
-          <i class="fas fa-bars"></i>
+        <button id="menuToggle" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden text-gray-700 hover:text-yellow-600 text-xl p-2 -mr-2">
+          <i class="fas fa-bars" id="menuIconOpen"></i>
+          <i class="fas fa-times hidden" id="menuIconClose"></i>
         </button>
       </div>
     </div>
 
     <!-- Mobile menu panel -->
-    <nav id="mobileMenu" class="md:hidden hidden border-t border-gray-100 bg-white px-4 py-3 space-y-1">
+    <nav id="mobileMenu" aria-label="Mobile navigation" class="md:hidden hidden border-t border-gray-100 bg-white px-4 py-3 space-y-1">
       <a href="/pages/about.html" class="block nav-link-mobile">About Us</a>
       <a href="/services" class="block nav-link-mobile">All Services</a>
       <a href="/blog" class="block nav-link-mobile">Blog</a>
