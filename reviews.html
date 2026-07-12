@@ -20,7 +20,8 @@
   <meta name="twitter:description" content="See what our satisfied customers say about RapidFix Kenya appliance repair services." />
   <meta name="keywords" content="RapidFix Kenya reviews, appliance repair testimonials, customer reviews Nairobi, repair service ratings, appliance repair feedback" />
   
-<link rel="stylesheet" href="/css/tailwind.min.css">  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<link rel="stylesheet" href="/css/tailwind.min.css">
+  <link rel="stylesheet" href="/css/nav.css">  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
   
   <style>
@@ -36,8 +37,8 @@
   </style>
 </head>
 <body class="bg-gray-50">
-  <header class="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-30">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between">
+    <header class="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
       <a href="/" class="rf-logo">
         <div class="rf-logo-icon">
           <div class="rf"><span class="r">R</span><span class="f">F</span></div>
@@ -47,8 +48,39 @@
           <span class="rf-country">Kenya</span>
         </div>
       </a>
-      <a href="tel:0768201855" class="bg-gray-900 text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2"><i class="fas fa-phone-alt"></i> 0768 201 855</a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="/pages/about.html" class="nav-link">About Us</a>
+        <a href="/services" class="nav-link">All Services</a>
+        <a href="/blog" class="nav-link">Blog</a>
+        <a href="/reviews" class="nav-link">Reviews</a>
+        <a href="/pages/contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Right: CTA + hamburger -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="tel:0768201855" class="call-btn text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 shadow-md">
+          <i class="fas fa-phone-alt"></i> <span class="hidden sm:inline">Call</span> 0768 201 855
+        </a>
+        <a href="https://wa.me/254768201855" target="_blank" class="whatsapp-btn text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 shadow-md">
+          <i class="fab fa-whatsapp"></i> <span class="hidden sm:inline">WhatsApp</span>
+        </a>
+        <button id="menuToggle" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden text-gray-700 hover:text-yellow-600 text-xl p-2 -mr-2">
+          <i class="fas fa-bars" id="menuIconOpen"></i>
+          <i class="fas fa-times hidden" id="menuIconClose"></i>
+        </button>
+      </div>
     </div>
+
+    <!-- Mobile menu panel -->
+    <nav id="mobileMenu" aria-label="Mobile navigation" class="md:hidden hidden border-t border-gray-100 bg-white px-4 py-3 space-y-1">
+      <a href="/pages/about.html" class="block nav-link-mobile">About Us</a>
+      <a href="/services" class="block nav-link-mobile">All Services</a>
+      <a href="/blog" class="block nav-link-mobile">Blog</a>
+      <a href="/reviews" class="block nav-link-mobile">Reviews</a>
+      <a href="/pages/contact.html" class="block nav-link-mobile">Contact</a>
+    </nav>
   </header>
 
   <main class="py-12">
@@ -136,5 +168,6 @@
       </div>
     </div>
   </footer>
+  <script src="/js/header.js"></script>
 </body>
 </html>
