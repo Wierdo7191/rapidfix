@@ -55,16 +55,6 @@
 </head>
 <body class="bg-gray-50">
     <header class="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-30">
-    <div class="hidden md:block bg-gray-50 border-b border-gray-100">
-      <nav class="max-w-7xl mx-auto px-4 sm:px-6 flex items-stretch">
-        <a href="/pages/about.html" class="nav-link-top flex-1 flex items-center justify-center text-center">About Us</a>
-        <a href="/services" class="nav-link-top flex-1 flex items-center justify-center text-center">All Services</a>
-        <a href="/blog" class="nav-link-top flex-1 flex items-center justify-center text-center">Blog</a>
-        <a href="/reviews" class="nav-link-top flex-1 flex items-center justify-center text-center">Reviews</a>
-        <a href="/pages/terms.html" class="nav-link-top flex-1 flex items-center justify-center text-center">Terms of Service</a>
-        <a href="/pages/contact.html" class="nav-link-top flex-1 flex items-center justify-center text-center">Contact</a>
-      </nav>
-    </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
       <a href="/" class="rf-logo">
@@ -77,6 +67,15 @@
         </div>
       </a>
 
+      <!-- Primary navigation (centered SaaS style) -->
+      <nav aria-label="Primary" class="rf-nav items-center justify-center">
+        <a href="/pages/about.html" class="rf-nav-link"><i class="fas fa-circle-info"></i><span>About Us</span></a>
+        <a href="/services" class="rf-nav-link"><i class="fas fa-tools"></i><span>All Services</span></a>
+        <a href="/blog" class="rf-nav-link"><i class="fas fa-newspaper"></i><span>Blog</span></a>
+        <a href="/reviews" class="rf-nav-link"><i class="fas fa-star"></i><span>Reviews</span></a>
+        <a href="/pages/terms.html" class="rf-nav-link"><i class="fas fa-shield-alt"></i><span>Terms of Service</span></a>
+        <a href="/pages/contact.html" class="rf-nav-link"><i class="fas fa-comment-dots"></i><span>Contact</span></a>
+      </nav>
       <!-- Right: CTA + hamburger -->
       <div class="flex items-center gap-2 sm:gap-3">
         <a href="tel:0768201855" class="call-btn text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 shadow-md">
@@ -85,7 +84,7 @@
         <a href="https://wa.me/254768201855" target="_blank" class="whatsapp-btn text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 shadow-md">
           <i class="fab fa-whatsapp"></i> <span class="hidden sm:inline">WhatsApp</span>
         </a>
-        <button id="menuToggle" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden text-gray-700 hover:text-yellow-600 text-xl p-2 -mr-2">
+        <button id="menuToggle" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false" class="rf-hamburger text-gray-700 hover:text-yellow-600 text-xl p-2 -mr-2">
           <i class="fas fa-bars" id="menuIconOpen"></i>
           <i class="fas fa-times hidden" id="menuIconClose"></i>
         </button>
@@ -93,13 +92,13 @@
     </div>
 
     <!-- Mobile menu panel -->
-    <nav id="mobileMenu" aria-label="Mobile navigation" class="md:hidden hidden border-t border-gray-100 bg-white px-4 py-3 space-y-1">
-      <a href="/pages/about.html" class="block nav-link-mobile">About Us</a>
-      <a href="/services" class="block nav-link-mobile">All Services</a>
-      <a href="/blog" class="block nav-link-mobile">Blog</a>
-      <a href="/reviews" class="block nav-link-mobile">Reviews</a>
-      <a href="/pages/terms.html" class="block nav-link-mobile">Terms of Service</a>
-      <a href="/pages/contact.html" class="block nav-link-mobile">Contact</a>
+    <nav id="mobileMenu" aria-label="Mobile navigation" class="rf-mobile-menu hidden border-t border-gray-100 bg-white px-4 py-3 space-y-1">
+      <a href="/pages/about.html" class="nav-link-mobile"><i class="fas fa-circle-info"></i><span>About Us</span></a>
+      <a href="/services" class="nav-link-mobile"><i class="fas fa-tools"></i><span>All Services</span></a>
+      <a href="/blog" class="nav-link-mobile"><i class="fas fa-newspaper"></i><span>Blog</span></a>
+      <a href="/reviews" class="nav-link-mobile"><i class="fas fa-star"></i><span>Reviews</span></a>
+      <a href="/pages/terms.html" class="nav-link-mobile"><i class="fas fa-shield-alt"></i><span>Terms of Service</span></a>
+      <a href="/pages/contact.html" class="nav-link-mobile"><i class="fas fa-comment-dots"></i><span>Contact</span></a>
     </nav>
   </header>
 

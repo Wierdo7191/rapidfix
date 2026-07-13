@@ -63,30 +63,60 @@
       background: #1f3a5f;
       transform: scale(1.02);
     }
-    .nav-link {
-      color: #1e293b;
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 0.25rem 0.25rem;
-      border-bottom: 2px solid transparent;
-      transition: color 0.15s, border-color 0.15s;
+    /* Responsive show/hide control (precompiled tailwind lacks md/lg display variants) */
+    .rf-nav { display: none; }
+    @media (min-width: 1024px) {
+      .rf-nav { display: flex; flex: 1 1 0%; }
+      .rf-hamburger { display: none !important; }
+      .rf-mobile-menu { display: none !important; }
     }
-    .nav-link:hover {
-      color: #d97706;
-      border-bottom-color: #f5b400;
+    /* Modern centered SaaS-style primary navigation (desktop) */
+    .rf-nav { gap: 0.25rem; }
+    .rf-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #334155;
+      font-weight: 500;
+      font-size: 0.9rem;
+      line-height: 1;
+      padding: 0.55rem 0.9rem;
+      border-radius: 9999px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: color 0.25s ease, background-color 0.25s ease;
     }
+    .rf-nav-link i { font-size: 0.9em; color: #94a3b8; transition: color 0.25s ease; }
+    .rf-nav-link:hover { background: #fffbeb; color: #d97706; }
+    .rf-nav-link:hover i { color: #f5b400; }
+    .rf-nav-link:focus-visible { outline: 2px solid #f5b400; outline-offset: 2px; }
+    .rf-nav-link-active { color: #b45309; background: #fff7e0; font-weight: 600; }
+    .rf-nav-link-active i { color: #f5b400; }
+    @media (min-width: 1280px) {
+      .rf-nav { gap: 0.5rem; }
+      .rf-nav-link { padding: 0.55rem 1rem; font-size: 0.92rem; }
+    }
+    @media (max-width: 1279px) {
+      .rf-nav-link { font-size: 0.82rem; padding: 0.45rem 0.65rem; gap: 0.35rem; }
+      .rf-nav-link i { display: none; }
+    }
+    /* Mobile navigation drawer links */
     .nav-link-mobile {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
       color: #1e293b;
       font-weight: 600;
       font-size: 1rem;
-      padding: 0.6rem 0.25rem;
+      padding: 0.6rem 0.75rem;
       border-radius: 0.5rem;
-      transition: background 0.15s, color 0.15s;
+      transition: background 0.2s, color 0.2s;
     }
-    .nav-link-mobile:hover {
-      background: #fffbeb;
-      color: #d97706;
-    }
+    .nav-link-mobile i { width: 1.25rem; text-align: center; color: #94a3b8; font-size: 0.95rem; transition: color 0.2s; }
+    .nav-link-mobile:hover { background: #fffbeb; color: #d97706; }
+    .nav-link-mobile:hover i { color: #f5b400; }
+    .nav-link-mobile-active { background: #fff7e0; color: #b45309; }
+    .nav-link-mobile-active i { color: #f5b400; }
     .section-badge {
       background: #dbeafe;
       color: #1e4a7a;
@@ -643,16 +673,6 @@ function validateForm(event) {
     }
   </script>
   <header class="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-30">
-    <div class="hidden md:block bg-gray-50 border-b border-gray-100">
-      <nav class="max-w-7xl mx-auto px-4 sm:px-6 flex items-stretch">
-        <a href="/pages/about.html" class="nav-link-top flex-1 flex items-center justify-center text-center">About Us</a>
-        <a href="/services" class="nav-link-top flex-1 flex items-center justify-center text-center">All Services</a>
-        <a href="/blog" class="nav-link-top flex-1 flex items-center justify-center text-center">Blog</a>
-        <a href="/reviews" class="nav-link-top flex-1 flex items-center justify-center text-center">Reviews</a>
-        <a href="/pages/terms.html" class="nav-link-top flex-1 flex items-center justify-center text-center">Terms of Service</a>
-        <a href="/pages/contact.html" class="nav-link-top flex-1 flex items-center justify-center text-center">Contact</a>
-      </nav>
-    </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
       <!-- Logo + brand -->
@@ -666,6 +686,15 @@ function validateForm(event) {
         </div>
       </div>
 
+      <!-- Primary navigation (centered SaaS style) -->
+      <nav aria-label="Primary" class="rf-nav items-center justify-center">
+        <a href="/pages/about.html" class="rf-nav-link"><i class="fas fa-circle-info"></i><span>About Us</span></a>
+        <a href="/services" class="rf-nav-link"><i class="fas fa-tools"></i><span>All Services</span></a>
+        <a href="/blog" class="rf-nav-link"><i class="fas fa-newspaper"></i><span>Blog</span></a>
+        <a href="/reviews" class="rf-nav-link"><i class="fas fa-star"></i><span>Reviews</span></a>
+        <a href="/pages/terms.html" class="rf-nav-link"><i class="fas fa-shield-alt"></i><span>Terms of Service</span></a>
+        <a href="/pages/contact.html" class="rf-nav-link"><i class="fas fa-comment-dots"></i><span>Contact</span></a>
+      </nav>
       <!-- Right: CTA + hamburger -->
       <div class="flex items-center gap-2 sm:gap-3">
         <a href="tel:0768201855" class="call-btn text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 shadow-md">
@@ -674,7 +703,7 @@ function validateForm(event) {
         <a href="https://wa.me/254768201855" target="_blank" class="whatsapp-btn text-white text-sm font-medium px-4 py-2 rounded-full flex items-center gap-2 shadow-md">
           <i class="fab fa-whatsapp"></i> <span class="hidden sm:inline">WhatsApp</span>
         </a>
-        <button id="menuToggle" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false" class="md:hidden text-gray-700 hover:text-yellow-600 text-xl p-2 -mr-2">
+        <button id="menuToggle" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false" class="rf-hamburger text-gray-700 hover:text-yellow-600 text-xl p-2 -mr-2">
           <i class="fas fa-bars" id="menuIconOpen"></i>
           <i class="fas fa-times hidden" id="menuIconClose"></i>
         </button>
@@ -682,13 +711,13 @@ function validateForm(event) {
     </div>
 
     <!-- Mobile menu panel -->
-    <nav id="mobileMenu" aria-label="Mobile navigation" class="md:hidden hidden border-t border-gray-100 bg-white px-4 py-3 space-y-1">
-      <a href="/pages/about.html" class="block nav-link-mobile">About Us</a>
-      <a href="/services" class="block nav-link-mobile">All Services</a>
-      <a href="/blog" class="block nav-link-mobile">Blog</a>
-      <a href="/reviews" class="block nav-link-mobile">Reviews</a>
-      <a href="/pages/terms.html" class="block nav-link-mobile">Terms of Service</a>
-      <a href="/pages/contact.html" class="block nav-link-mobile">Contact</a>
+    <nav id="mobileMenu" aria-label="Mobile navigation" class="rf-mobile-menu hidden border-t border-gray-100 bg-white px-4 py-3 space-y-1">
+      <a href="/pages/about.html" class="nav-link-mobile"><i class="fas fa-circle-info"></i><span>About Us</span></a>
+      <a href="/services" class="nav-link-mobile"><i class="fas fa-tools"></i><span>All Services</span></a>
+      <a href="/blog" class="nav-link-mobile"><i class="fas fa-newspaper"></i><span>Blog</span></a>
+      <a href="/reviews" class="nav-link-mobile"><i class="fas fa-star"></i><span>Reviews</span></a>
+      <a href="/pages/terms.html" class="nav-link-mobile"><i class="fas fa-shield-alt"></i><span>Terms of Service</span></a>
+      <a href="/pages/contact.html" class="nav-link-mobile"><i class="fas fa-comment-dots"></i><span>Contact</span></a>
     </nav>
   </header>
 
