@@ -129,6 +129,15 @@
   color: #f5b400;
 }
 
+/* Compact header Call CTA so it fits alongside the centered nav */
+.header-call-btn {
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+  font-size: 0.8rem;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
 /* ===================================================================
    Header call / WhatsApp CTA buttons (unchanged)
    =================================================================== */
