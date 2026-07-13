@@ -205,8 +205,199 @@
       transform: scale(1.1);
     }
     @keyframes scroll-right {
-      0% { transform: translateX(calc(-50%)); }
-      100% { transform: translateX(0); }
+       0% { transform: translateX(calc(-50%)); }
+       100% { transform: translateX(0); }
+     }
+
+    /* Smooth anchor scrolling for the new service tiles */
+    html { scroll-behavior: smooth; }
+
+    /* ===== Utility patches: classes missing from precompiled tailwind.min.css ===== */
+    .py-14 { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+    .scroll-mt-24 { scroll-margin-top: 6rem; }
+
+    /* ===== Refactored hero (self-contained layout, no Tailwind dependency) ===== */
+    .hero-section { position: relative; overflow: hidden; }
+    .hero-container {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: stretch;
+    }
+    .hero-content-col {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+    .hero-right {
+      position: relative;
+      display: flex;
+      padding-top: 2rem;
+    }
+    .hero-img-wrap {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 340px;
+      border-radius: 1.5rem;
+      background: linear-gradient(135deg, #0b1a33 0%, #1f3a5f 100%);
+    }
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      animation: heroFadeIn 0.35s ease both;
+    }
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: scale(1.04); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @media (min-width: 640px) {
+      .hero-container { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .hero-img-wrap { height: 440px; }
+    }
+    @media (min-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+      }
+      .hero-content-col {
+        min-height: 640px;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+        padding-right: 3rem;
+      }
+      .hero-right {
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+        padding-left: 2.5rem;
+      }
+      .hero-img-wrap {
+        height: 100%;
+        border-radius: 2rem;
+      }
+    }
+
+    /* ===== Reveal on scroll ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ===== Info cards (Why Customers Choose) ===== */
+    .info-card {
+      background: #ffffff;
+      border: 1px solid #eef2f6;
+      border-radius: 1.25rem;
+      padding: 1.75rem;
+      box-shadow: 0 10px 25px -8px rgba(0,0,0,0.06);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+    .info-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 38px -14px rgba(0,0,0,0.14);
+    }
+    .info-icon {
+      width: 3rem; height: 3rem;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 0.9rem;
+      background: #fff6db;
+      color: #d97706;
+      font-size: 1.25rem;
+    }
+    .chip {
+      display: inline-flex; align-items: center;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #1e293b;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.3rem 0.8rem;
+      border-radius: 40px;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+    .chip:hover {
+      background: #fff6db;
+      border-color: #f5b400;
+      color: #92400e;
+    }
+    .brand-badge {
+      display: inline-flex; align-items: center;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #1e293b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.35rem 0.9rem;
+      border-radius: 0.6rem;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+    .brand-badge:hover {
+      background: #fff6db;
+      border-color: #f5b400;
+      color: #92400e;
+    }
+
+    /* ===== Service tiles (What Needs Repair Today?) ===== */
+    .service-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.75rem;
+      background: #ffffff;
+      border: 2px solid #eef2f6;
+      border-radius: 1.25rem;
+      padding: 1.5rem 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: #1e293b;
+      box-shadow: 0 8px 20px -10px rgba(0,0,0,0.08);
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+    }
+    .service-tile:hover,
+    .service-tile:focus-visible {
+      transform: translateY(-5px);
+      border-color: #f5b400;
+      box-shadow: 0 16px 32px -14px rgba(245,180,0,0.45);
+      outline: none;
+    }
+    .service-tile-icon {
+      width: 3.5rem; height: 3.5rem;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 1rem;
+      background: #fff6db;
+      color: #d97706;
+      font-size: 1.5rem;
+      transition: background 0.28s ease, color 0.28s ease;
+    }
+    .service-tile:hover .service-tile-icon,
+    .service-tile:focus-visible .service-tile-icon {
+      background: #f5b400;
+      color: #142b4a;
+    }
+    .service-tile-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      line-height: 1.2;
     }
   </style>
   <script>
@@ -342,11 +533,27 @@ function validateForm(event) {
                   closeMobileMenu();
                 }
               });
-              document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') closeMobileMenu();
-              });
+               document.addEventListener('keydown', function(event) {
+                 if (event.key === 'Escape') closeMobileMenu();
+               });
+             }
+
+            // Reveal-on-scroll for info cards and service tiles
+            const revealEls = document.querySelectorAll('.reveal');
+            if ('IntersectionObserver' in window) {
+              const revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                  }
+                });
+              }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+              revealEls.forEach(function(el) { revealObserver.observe(el); });
+            } else {
+              revealEls.forEach(function(el) { el.classList.add('is-visible'); });
             }
-        });
+         });
      </script>
      <script type="application/ld+json">
      {
@@ -485,12 +692,12 @@ function validateForm(event) {
 
   <main>
 
-    <!-- ======= HERO + COVER PHOTO ======= -->
-    <section class="hero-gradient text-white py-10 md:py-16">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-          <!-- left hero text -->
-          <div class="md:w-3/5">
+    <!-- ======= HERO ======= -->
+    <section class="hero-section hero-gradient text-white">
+      <div class="hero-container">
+        <div class="hero-grid">
+          <!-- Left: hero content -->
+          <div class="hero-content-col">
             <div class="flex items-center gap-2 text-yellow-300 text-sm font-semibold uppercase tracking-wider mb-3">
               <i class="fas fa-shield-alt"></i> <span>KENYA'S TRUSTED REPAIR EXPERTS</span>
             </div>
@@ -516,31 +723,139 @@ function validateForm(event) {
               <span><i class="fas fa-clock text-yellow-400 mr-1"></i> 24h Response Time</span>
             </div>
           </div>
-          <!-- COVER PHOTO (right) – visual card -->
-          <div class="md:w-2/5 w-full">
-            <div class="cover-photo shadow-2xl relative overflow-hidden border border-white/10">
-              <img src="human%20rapid%20Jul%2011,%202026,%2008_38_34%20PM.png" alt="RapidFix hero image" loading="eager" decoding="async" onerror="this.onerror=null;this.src='Images/render%20Image%202026-07-09%20at%2011.41.13.jpeg';" />
-              <div class="cover-photo-content flex flex-col items-start gap-1">
-                <div class="flex items-center gap-2 text-yellow-300 text-sm font-semibold">
-                  <i class="fas fa-bolt"></i> <span>RapidFix Kenya</span>
-                </div>
-                <h2 class="text-2xl font-bold text-white">Same-Day Service</h2>
-                <p class="text-gray-200 text-sm">Call us – we come to you</p>
-                <div class="mt-3 flex items-center gap-3 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-xl">
-                  <i class="fas fa-tools text-yellow-400 text-xl"></i>
-                  <span class="text-white font-medium">TV • Washing • Fridge • Cooker</span>
-                </div>
-                <div class="mt-4 flex gap-4 text-xs text-gray-300">
-                  <span><i class="fas fa-map-pin text-yellow-400"></i> Westlands • Kilimani • Karen</span>
-                  <span><i class="fas fa-wrench text-yellow-400"></i> All brands</span>
-                </div>
-              </div>
-              <!-- decorative icon -->
-              <div class="absolute -right-6 -bottom-6 text-yellow-500/20 text-8xl">
-                <i class="fas fa-microchip"></i>
-              </div>
+
+          <!-- Right: full-height technician image (no text overlays) -->
+          <div class="hero-right">
+            <div class="hero-img-wrap">
+              <img src="human%20rapid%20Jul%2011,%202026,%2008_38_34%20PM.png"
+                   alt="RapidFix Kenya technician repairing a television"
+                   class="hero-img" loading="eager" decoding="async"
+                   onerror="this.onerror=null;this.src='Images/render%20Image%202026-07-09%20at%2011.41.13.jpeg';" />
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= WHY CUSTOMERS CHOOSE RAPIDFIX KENYA ======= -->
+    <section class="py-14 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10">
+          <span class="section-badge"><i class="fas fa-heart mr-1"></i> WHY CHOOSE RAPIDFIX</span>
+          <h2 class="text-3xl font-extrabold text-gray-800 mt-2">Why Customers Choose RapidFix Kenya</h2>
+          <p class="text-gray-500 max-w-2xl mx-auto mt-1">Everything you need to know about our repair service — clear, honest, and built around your convenience.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- Card One -->
+          <div class="info-card reveal">
+            <div class="info-icon"><i class="fas fa-bolt"></i></div>
+            <h3 class="text-lg font-bold text-gray-800 mt-4">Same-Day Service</h3>
+            <p class="text-sm text-gray-600 mt-2 leading-relaxed">
+              Call us and our technicians come directly to your location. Professional repairs delivered at your convenience.
+            </p>
+          </div>
+
+          <!-- Card Two -->
+          <div class="info-card reveal" style="transition-delay: 60ms;">
+            <div class="info-icon"><i class="fas fa-tools"></i></div>
+            <h3 class="text-lg font-bold text-gray-800 mt-4">Appliances We Repair</h3>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="chip">TVs</span>
+              <span class="chip">Washing Machines</span>
+              <span class="chip">Refrigerators</span>
+              <span class="chip">Cookers</span>
+              <span class="chip">Microwaves</span>
+              <span class="chip">Dishwashers</span>
+              <span class="chip">Air Conditioners</span>
+            </div>
+          </div>
+
+          <!-- Card Three -->
+          <div class="info-card reveal" style="transition-delay: 120ms;">
+            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <h3 class="text-lg font-bold text-gray-800 mt-4">Areas We Serve</h3>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="chip">Westlands</span>
+              <span class="chip">Kilimani</span>
+              <span class="chip">Karen</span>
+              <span class="chip">Kasarani</span>
+              <span class="chip">Embakasi</span>
+              <span class="chip">Langata</span>
+              <span class="chip">Kileleshwa</span>
+              <span class="chip">Lavington</span>
+              <span class="chip">Ruaka</span>
+              <span class="chip">Roysambu</span>
+              <span class="chip">South B</span>
+              <span class="chip">South C</span>
+            </div>
+          </div>
+
+          <!-- Card Four -->
+          <div class="info-card reveal" style="transition-delay: 180ms;">
+            <div class="info-icon"><i class="fas fa-tag"></i></div>
+            <h3 class="text-lg font-bold text-gray-800 mt-4">Brands We Repair</h3>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="brand-badge">Samsung</span>
+              <span class="brand-badge">LG</span>
+              <span class="brand-badge">Ramtons</span>
+              <span class="brand-badge">Mika</span>
+              <span class="brand-badge">Bruhm</span>
+              <span class="brand-badge">Hisense</span>
+              <span class="brand-badge">Panasonic</span>
+              <span class="brand-badge">Philips</span>
+              <span class="brand-badge">TCL</span>
+              <span class="brand-badge">Skyworth</span>
+              <span class="brand-badge">Sayona</span>
+              <span class="brand-badge">Kenwood</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= WHAT NEEDS REPAIR TODAY? ======= -->
+    <section class="py-14 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-10">
+          <span class="section-badge"><i class="fas fa-screwdriver-wrench mr-1"></i> QUICK NAVIGATION</span>
+          <h2 class="text-3xl font-extrabold text-gray-800 mt-2">What Needs Repair Today?</h2>
+          <p class="text-gray-500 max-w-2xl mx-auto mt-1">Select your appliance and jump straight to the right service.</p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <a href="#services" class="service-tile reveal" aria-label="Television repair services">
+            <span class="service-tile-icon"><i class="fas fa-tv"></i></span>
+            <span class="service-tile-title">Television Repair</span>
+          </a>
+          <a href="#services" class="service-tile reveal" style="transition-delay: 50ms;" aria-label="Washing machine repair services">
+            <span class="service-tile-icon"><i class="fas fa-tshirt"></i></span>
+            <span class="service-tile-title">Washing Machine Repair</span>
+          </a>
+          <a href="#services" class="service-tile reveal" style="transition-delay: 100ms;" aria-label="Refrigerator repair services">
+            <span class="service-tile-icon"><i class="fas fa-snowflake"></i></span>
+            <span class="service-tile-title">Refrigerator Repair</span>
+          </a>
+          <a href="#services" class="service-tile reveal" style="transition-delay: 150ms;" aria-label="Cooker repair services">
+            <span class="service-tile-icon"><i class="fas fa-fire"></i></span>
+            <span class="service-tile-title">Cooker Repair</span>
+          </a>
+          <a href="#services" class="service-tile reveal" style="transition-delay: 200ms;" aria-label="Dishwasher repair services">
+            <span class="service-tile-icon"><i class="fas fa-utensils"></i></span>
+            <span class="service-tile-title">Dishwasher Repair</span>
+          </a>
+          <a href="#services" class="service-tile reveal" style="transition-delay: 250ms;" aria-label="Oven repair services">
+            <span class="service-tile-icon"><i class="fas fa-temperature-high"></i></span>
+            <span class="service-tile-title">Oven Repair</span>
+          </a>
+          <a href="#services" class="service-tile reveal" style="transition-delay: 300ms;" aria-label="Air conditioner repair services">
+            <span class="service-tile-icon"><i class="fas fa-wind"></i></span>
+            <span class="service-tile-title">Air Conditioner Repair</span>
+          </a>
+          <a href="#services" class="service-tile reveal" style="transition-delay: 350ms;" aria-label="General appliance repair services">
+            <span class="service-tile-icon"><i class="fas fa-cogs"></i></span>
+            <span class="service-tile-title">General Appliance Repair</span>
+          </a>
         </div>
       </div>
     </section>
@@ -595,7 +910,7 @@ function validateForm(event) {
     </section>
 
     <!-- ======= SERVICES (WHAT WE FIX) ======= -->
-    <section id="services" class="py-12 bg-gray-50">
+    <section id="services" class="py-12 bg-gray-50 scroll-mt-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-10">
           <span class="section-badge"><i class="fas fa-tools mr-1"></i> WHAT WE FIX</span>
