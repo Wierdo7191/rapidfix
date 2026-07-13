@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /backup/
+Disallow: /css/
+Disallow: /js/
+Disallow: /Images/
+
+Sitemap: https://rapidfixkenya.co.ke/sitemap.xml
