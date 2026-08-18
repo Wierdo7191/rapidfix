@@ -1,1 +1,4 @@
 .kilo/
+.env
+.env.local
+.env.*.local
