@@ -162,6 +162,20 @@ export async function requireAdmin(req, res, SUPABASE_URL, ANON_KEY, SERVICE_ROL
   return null; // authorized
 }
 
+export async function verifyAdminSession(req, SUPABASE_URL, ANON_KEY, SERVICE_ROLE_KEY) {
+  const jwtResult = await verifyJwt(req, SUPABASE_URL, ANON_KEY);
+  if (!jwtResult.authenticated) {
+    return { authorized: false, user: null, profile: null, error: 'Unauthorized' };
+  }
+
+  const adminResult = await getAdminProfile(req, SUPABASE_URL, SERVICE_ROLE_KEY, jwtResult.user.id);
+  if (!adminResult.authorized) {
+    return { authorized: false, user: null, profile: null, error: 'Forbidden' };
+  }
+
+  return { authorized: true, user: jwtResult.user, profile: adminResult.profile, error: null };
+}
+
 export function safeError(error) {
   if (typeof error !== 'string') return 'Internal server error.';
   // Do not expose database messages, stack traces, or internal details
