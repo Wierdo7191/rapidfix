@@ -119,10 +119,36 @@
     return result.user;
   }
 
+  async function getAccessToken() {
+    if (!supabase) {
+      var initialized = await initSupabase();
+      if (!initialized) return null;
+    }
+    try {
+      var sessionResult = await supabase.auth.getSession();
+      return sessionResult.data?.session?.access_token || null;
+    } catch (e) {
+      console.error('[AdminAuth] Failed to get access token:', e);
+      return null;
+    }
+  }
+
+  function getSupabaseClient() {
+    if (!supabase) return null;
+    return supabase;
+  }
+
   window.RapidFixAdmin = {
     verifySession: verifySession,
     login: login,
     logout: logout,
+<<<<<<< ours
     requireAdmin: requireAdmin
+=======
+    requireAdmin: requireAdmin,
+    initSupabase: initSupabase,
+    getAccessToken: getAccessToken,
+    getSupabaseClient: getSupabaseClient
+>>>>>>> theirs
   };
 })();
