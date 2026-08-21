@@ -20,8 +20,8 @@
     }
 
     try {
-      if (typeof supabase !== 'undefined' && supabase.createClient) {
-        supabase = supabase.createClient(config.url, config.anonKey);
+      if (typeof window !== 'undefined' && window.supabase && window.supabase.createClient) {
+        supabase = window.supabase.createClient(config.url, config.anonKey);
         return true;
       }
       console.error('[AdminAuth] Supabase JS client not loaded.');
