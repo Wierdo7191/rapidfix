@@ -68,7 +68,7 @@
     };
 
     (async function () {
-      var initialized = await initSupabase();
+      var initialized = await window.RapidFixAdmin.initSupabase();
       if (!initialized) {
         showError('Admin system is not configured.');
         return;

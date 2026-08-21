@@ -123,6 +123,7 @@
     verifySession: verifySession,
     login: login,
     logout: logout,
-    requireAdmin: requireAdmin
+    requireAdmin: requireAdmin,
+    initSupabase: initSupabase
   };
 })();
