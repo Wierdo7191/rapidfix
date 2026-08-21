@@ -1,7 +1,7 @@
 // Vercel Serverless Function: Admin Session Verification
 // Verifies JWT and admin role, returns minimal admin info
 
-import { setCorsHeaders, handlePreflight, verifyAdminSession, safeError } from '../api/_security.js';
+import { setCorsHeaders, handlePreflight, verifyAdminSession, safeError } from '../_security.js';
 
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') {
