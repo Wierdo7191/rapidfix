@@ -43,6 +43,15 @@
       var session = sessionResult.data?.session;
 
       if (!session || !session.access_token) {
+        for (var attempt = 0; attempt < 5; attempt++) {
+          await new Promise(function (resolve) { setTimeout(resolve, 300); });
+          sessionResult = await supabase.auth.getSession();
+          session = sessionResult.data?.session;
+          if (session && session.access_token) break;
+        }
+      }
+
+      if (!session || !session.access_token) {
         return { valid: false, error: 'No active session' };
       }
 
