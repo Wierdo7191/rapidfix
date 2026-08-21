@@ -75,7 +75,7 @@
       }
 
       // If already logged in as admin, redirect to dashboard
-      var sessionResult = await verifySession();
+      var sessionResult = await window.RapidFixAdmin.verifySession();
       if (sessionResult.valid) {
         window.location.href = '/admin/index.html';
         return;
@@ -98,7 +98,7 @@
         btn.disabled = true;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
 
-        var result = await login(email, password);
+        var result = await window.RapidFixAdmin.login(email, password);
 
         btn.disabled = false;
         btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
