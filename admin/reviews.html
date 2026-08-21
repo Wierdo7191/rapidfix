@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reviews — Admin — RapidFix Kenya</title>
+  <link rel="stylesheet" href="/css/tailwind.min.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="admin-layout">
+    <aside id="adminSidebar" class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <div class="admin-sidebar-brand">
+          <div class="admin-sidebar-icon">
+            <i class="fas fa-cog"></i>
+          </div>
+          <div>
+            <div class="admin-sidebar-title">Admin</div>
+            <div class="admin-sidebar-subtitle">RapidFix Kenya</div>
+          </div>
+        </div>
+        <button id="adminSidebarClose" class="admin-sidebar-close" aria-label="Close menu">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav class="admin-sidebar-nav">
+        <a href="/admin/index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="/admin/messages.html"><i class="fas fa-envelope"></i> Messages</a>
+        <a href="/admin/reviews.html"><i class="fas fa-star"></i> Reviews</a>
+        <a href="/admin/settings.html"><i class="fas fa-cog"></i> Site Settings</a>
+        <a href="/admin/content.html" class="opacity-50 pointer-events-none"><i class="fas fa-file-alt"></i> Frontend Content</a>
+        <a href="/admin/posts.html" class="opacity-50 pointer-events-none"><i class="fas fa-newspaper"></i> Posts</a>
+        <a href="/admin/analytics.html" class="opacity-50 pointer-events-none"><i class="fas fa-chart-line"></i> Analytics</a>
+      </nav>
+    </aside>
+
+    <div id="adminSidebarOverlay" class="admin-sidebar-overlay"></div>
+
+    <div class="admin-main">
+      <header class="admin-header">
+        <div class="admin-header-left">
+          <button id="adminMobileToggle" class="admin-mobile-toggle" aria-label="Open menu">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="admin-header-title">Reviews</div>
+        </div>
+        <div class="admin-header-right">
+          <span id="adminEmail" class="admin-header-email">Loading...</span>
+          <button id="adminLogoutBtn" class="admin-logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <div class="flex items-center justify-between mb-6">
+          <h1 class="text-xl font-bold text-gray-800">Reviews</h1>
+          <button onclick="loadReviews()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-lg transition">
+            <i class="fas fa-sync-alt"></i> Refresh
+          </button>
+        </div>
+
+        <div id="reviewError" class="hidden mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm"></div>
+        <div id="reviewSuccess" class="hidden mt-4 p-3 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm"></div>
+
+        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-sm">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="text-left px-4 py-3 font-medium text-gray-600">Name</th>
+                  <th class="text-left px-4 py-3 font-medium text-gray-600">Email</th>
+                  <th class="text-left px-4 py-3 font-medium text-gray-600">Rating</th>
+                  <th class="text-left px-4 py-3 font-medium text-gray-600">Review</th>
+                  <th class="text-left px-4 py-3 font-medium text-gray-600">Article</th>
+                  <th class="text-left px-4 py-3 font-medium text-gray-600">Status</th>
+                  <th class="text-left px-4 py-3 font-medium text-gray-600">Date</th>
+                  <th class="text-left px-4 py-3 font-medium text-gray-600">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="reviewTableBody" class="divide-y divide-gray-100">
+                <tr><td colspan="8" class="px-4 py-8 text-center text-gray-500">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    window.__RAPIDFIX_SUPABASE__ = {
+      url: 'https://qspxyikonaelzdvithxk.supabase.co',
+      anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFzcHh5aWtvbmFlbHpkdml0aHhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcwOTE1OTQsImV4cCI6MjEwMjY2NzU5NH0.dXzbBQTjRLh_bi7IHKmCnpR_Az2UdhqnQfdzRuKjV4E'
+    };
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/admin-auth.js"></script>
+  <script src="/js/admin-shell.js"></script>
+
+  <script>
+    (async function () {
+      await window.RapidFixAdmin.requireAdmin({ redirectTo: '/admin/login.html' });
+      loadReviews();
+    })();
+
+    function showReviewError(message) {
+      var el = document.getElementById('reviewError');
+      el.textContent = message;
+      el.classList.remove('hidden');
+      document.getElementById('reviewSuccess').classList.add('hidden');
+    }
+
+    function showReviewSuccess(message) {
+      var el = document.getElementById('reviewSuccess');
+      el.textContent = message;
+      el.classList.remove('hidden');
+      document.getElementById('reviewError').classList.add('hidden');
+    }
+
+    async function loadReviews() {
+      var tbody = document.getElementById('reviewTableBody');
+      tbody.innerHTML = '<tr><td colspan="8" class="px-4 py-8 text-center text-gray-500">Loading...</td></tr>';
+      showReviewError('');
+      showReviewSuccess('');
+
+      try {
+        var token = await window.RapidFixAdmin.getAccessToken();
+        if (!token) {
+          showReviewError('Session expired. Please log in again.');
+          return;
+        }
+
+        var response = await fetch('/api/reviews?status=all', {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+
+        if (!response.ok) {
+          var err = await response.json();
+          showReviewError(err.error || 'Failed to load reviews.');
+          return;
+        }
+
+        var reviews = await response.json();
+        if (!Array.isArray(reviews) || reviews.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="8" class="px-4 py-8 text-center text-gray-500">No reviews found.</td></tr>';
+          return;
+        }
+
+        var html = '';
+        reviews.forEach(function (review) {
+          var statusClass = review.status === 'approved' ? 'bg-green-100 text-green-700' : review.status === 'rejected' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700';
+          var actions = '';
+          if (review.status === 'pending') {
+            actions = '<button onclick="updateReviewStatus(\'' + review.id + '\', \'approved\')" class="text-green-600 hover:text-green-800 mr-2">Approve</button>' +
+                      '<button onclick="updateReviewStatus(\'' + review.id + '\', \'rejected\')" class="text-red-600 hover:text-red-800">Reject</button>';
+          } else {
+            actions = '<span class="text-gray-400 text-xs">No actions</span>';
+          }
+
+          html += '<tr>' +
+            '<td class="px-4 py-3">' + escapeHtml(review.name || '') + '</td>' +
+            '<td class="px-4 py-3">' + escapeHtml(review.email || '') + '</td>' +
+            '<td class="px-4 py-3">' + (review.rating || '') + '/5</td>' +
+            '<td class="px-4 py-3 max-w-xs truncate" title="' + escapeHtml(review.review_text || '') + '">' + escapeHtml(review.review_text || '') + '</td>' +
+            '<td class="px-4 py-3 max-w-xs truncate" title="' + escapeHtml(review.article_title || '') + '">' + escapeHtml(review.article_title || '') + '</td>' +
+            '<td class="px-4 py-3"><span class="px-2 py-1 rounded-full text-xs font-medium ' + statusClass + '">' + (review.status || '') + '</span></td>' +
+            '<td class="px-4 py-3">' + formatDate(review.created_at) + '</td>' +
+            '<td class="px-4 py-3">' + actions + '</td>' +
+          '</tr>';
+        });
+
+        tbody.innerHTML = html;
+      } catch (e) {
+        showReviewError('Error loading reviews: ' + e.message);
+      }
+    }
+
+    async function updateReviewStatus(id, status) {
+      showReviewError('');
+      showReviewSuccess('');
+
+      try {
+        var token = await window.RapidFixAdmin.getAccessToken();
+        if (!token) {
+          showReviewError('Session expired. Please log in again.');
+          return;
+        }
+
+        var response = await fetch('/api/reviews', {
+          method: 'PATCH',
+          headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ id: id, status: status })
+        });
+
+        if (!response.ok) {
+          var err = await response.json();
+          showReviewError(err.error || 'Failed to update review.');
+          return;
+        }
+
+        showReviewSuccess('Review ' + status + ' successfully.');
+        loadReviews();
+      } catch (e) {
+        showReviewError('Error updating review: ' + e.message);
+      }
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      var div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function formatDate(iso) {
+      if (!iso) return '';
+      var d = new Date(iso);
+      return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+  </script>
+</body>
+</html>

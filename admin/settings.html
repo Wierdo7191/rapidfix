@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Site Settings — Admin — RapidFix Kenya</title>
+  <link rel="stylesheet" href="/css/tailwind.min.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="admin-layout">
+    <aside id="adminSidebar" class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <div class="admin-sidebar-brand">
+          <div class="admin-sidebar-icon">
+            <i class="fas fa-cog"></i>
+          </div>
+          <div>
+            <div class="admin-sidebar-title">Admin</div>
+            <div class="admin-sidebar-subtitle">RapidFix Kenya</div>
+          </div>
+        </div>
+        <button id="adminSidebarClose" class="admin-sidebar-close" aria-label="Close menu">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav class="admin-sidebar-nav">
+        <a href="/admin/index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="/admin/messages.html"><i class="fas fa-envelope"></i> Messages</a>
+        <a href="/admin/reviews.html"><i class="fas fa-star"></i> Reviews</a>
+        <a href="/admin/settings.html"><i class="fas fa-cog"></i> Site Settings</a>
+        <a href="/admin/content.html" class="opacity-50 pointer-events-none"><i class="fas fa-file-alt"></i> Frontend Content</a>
+        <a href="/admin/posts.html" class="opacity-50 pointer-events-none"><i class="fas fa-newspaper"></i> Posts</a>
+        <a href="/admin/analytics.html" class="opacity-50 pointer-events-none"><i class="fas fa-chart-line"></i> Analytics</a>
+      </nav>
+    </aside>
+
+    <div id="adminSidebarOverlay" class="admin-sidebar-overlay"></div>
+
+    <div class="admin-main">
+      <header class="admin-header">
+        <div class="admin-header-left">
+          <button id="adminMobileToggle" class="admin-mobile-toggle" aria-label="Open menu">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="admin-header-title">Site Settings</div>
+        </div>
+        <div class="admin-header-right">
+          <span id="adminEmail" class="admin-header-email">Loading...</span>
+          <button id="adminLogoutBtn" class="admin-logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <div class="flex items-center justify-between mb-6">
+          <h1 class="text-xl font-bold text-gray-800">Site Settings</h1>
+          <button onclick="loadSettings()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-lg transition">
+            <i class="fas fa-sync-alt"></i> Refresh
+          </button>
+        </div>
+
+        <div id="settingError" class="hidden mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm"></div>
+        <div id="settingSuccess" class="hidden mt-4 p-3 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm"></div>
+
+        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden mb-6">
+          <div class="px-4 py-3 bg-gray-50 border-b border-gray-200">
+            <h2 class="font-semibold text-gray-700">Existing Settings</h2>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-sm">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="text-left px-4 py-3 font-medium text-gray-600">Key</th>
+                  <th class="text-left px-4 py-3 font-medium text-gray-600">Value</th>
+                  <th class="text-left px-4 py-3 font-medium text-gray-600">Updated</th>
+                  <th class="text-left px-4 py-3 font-medium text-gray-600">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="settingTableBody" class="divide-y divide-gray-100">
+                <tr><td colspan="4" class="px-4 py-8 text-center text-gray-500">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+          <h2 class="font-semibold text-gray-700 mb-4">Add / Update Setting</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Key</label>
+              <input type="text" id="settingKey" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" placeholder="e.g. site_title" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Value</label>
+              <input type="text" id="settingValue" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" placeholder="e.g. RapidFix Kenya" />
+            </div>
+            <div class="flex items-end">
+              <button onclick="saveSetting()" class="w-full bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-semibold py-2 rounded-lg transition">
+                Save Setting
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    window.__RAPIDFIX_SUPABASE__ = {
+      url: 'https://qspxyikonaelzdvithxk.supabase.co',
+      anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFzcHh5aWtvbmFlbHpkdml0aHhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcwOTE1OTQsImV4cCI6MjEwMjY2NzU5NH0.dXzbBQTjRLh_bi7IHKmCnpR_Az2UdhqnQfdzRuKjV4E'
+    };
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/admin-auth.js"></script>
+  <script src="/js/admin-shell.js"></script>
+
+  <script>
+    (async function () {
+      await window.RapidFixAdmin.requireAdmin({ redirectTo: '/admin/login.html' });
+      loadSettings();
+    })();
+
+    function showSettingError(message) {
+      var el = document.getElementById('settingError');
+      el.textContent = message;
+      el.classList.remove('hidden');
+      document.getElementById('settingSuccess').classList.add('hidden');
+    }
+
+    function showSettingSuccess(message) {
+      var el = document.getElementById('settingSuccess');
+      el.textContent = message;
+      el.classList.remove('hidden');
+      document.getElementById('settingError').classList.add('hidden');
+    }
+
+    async function loadSettings() {
+      var tbody = document.getElementById('settingTableBody');
+      tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-8 text-center text-gray-500">Loading...</td></tr>';
+      showSettingError('');
+      showSettingSuccess('');
+
+      try {
+        var supabase = window.RapidFixAdmin.getSupabaseClient();
+        if (!supabase) {
+          showSettingError('Supabase client not initialized.');
+          return;
+        }
+
+        var { data, error } = await supabase
+          .from('site_settings')
+          .select('*')
+          .order('key', { ascending: true });
+
+        if (error) {
+          showSettingError('Failed to load settings: ' + error.message);
+          return;
+        }
+
+        if (!data || data.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-8 text-center text-gray-500">No settings found.</td></tr>';
+          return;
+        }
+
+        var html = '';
+        data.forEach(function (setting) {
+          html += '<tr>' +
+            '<td class="px-4 py-3 font-mono text-xs">' + escapeHtml(setting.key || '') + '</td>' +
+            '<td class="px-4 py-3 max-w-md truncate" title="' + escapeHtml(setting.value || '') + '">' + escapeHtml(setting.value || '') + '</td>' +
+            '<td class="px-4 py-3">' + formatDate(setting.updated_at) + '</td>' +
+            '<td class="px-4 py-3">' +
+              '<button onclick="editSetting(\'' + escapeHtml(setting.key || '') + '\', \'' + escapeHtml(setting.value || '').replace(/'/g, "\\'") + '\')" class="text-blue-600 hover:text-blue-800 mr-2">Edit</button>' +
+              '<button onclick="deleteSetting(\'' + escapeHtml(setting.key || '') + '\')" class="text-red-600 hover:text-red-800">Delete</button>' +
+            '</td>' +
+          '</tr>';
+        });
+
+        tbody.innerHTML = html;
+      } catch (e) {
+        showSettingError('Error loading settings: ' + e.message);
+      }
+    }
+
+    async function saveSetting() {
+      var keyInput = document.getElementById('settingKey');
+      var valueInput = document.getElementById('settingValue');
+      var key = keyInput.value.trim();
+      var value = valueInput.value.trim();
+
+      if (!key || !value) {
+        showSettingError('Key and value are required.');
+        return;
+      }
+
+      showSettingError('');
+      showSettingSuccess('');
+
+      try {
+        var supabase = window.RapidFixAdmin.getSupabaseClient();
+        if (!supabase) {
+          showSettingError('Supabase client not initialized.');
+          return;
+        }
+
+        var { error } = await supabase
+          .from('site_settings')
+          .upsert({ key: key, value: value, updated_at: new Date().toISOString() });
+
+        if (error) {
+          showSettingError('Failed to save setting: ' + error.message);
+          return;
+        }
+
+        showSettingSuccess('Setting saved successfully.');
+        keyInput.value = '';
+        valueInput.value = '';
+        loadSettings();
+      } catch (e) {
+        showSettingError('Error saving setting: ' + e.message);
+      }
+    }
+
+    async function editSetting(key, value) {
+      document.getElementById('settingKey').value = key;
+      document.getElementById('settingValue').value = value;
+      document.getElementById('settingKey').focus();
+    }
+
+    async function deleteSetting(key) {
+      if (!confirm('Delete setting "' + key + '"?')) return;
+
+      showSettingError('');
+      showSettingSuccess('');
+
+      try {
+        var supabase = window.RapidFixAdmin.getSupabaseClient();
+        if (!supabase) {
+          showSettingError('Supabase client not initialized.');
+          return;
+        }
+
+        var { error } = await supabase
+          .from('site_settings')
+          .delete()
+          .eq('key', key);
+
+        if (error) {
+          showSettingError('Failed to delete setting: ' + error.message);
+          return;
+        }
+
+        showSettingSuccess('Setting deleted successfully.');
+        loadSettings();
+      } catch (e) {
+        showSettingError('Error deleting setting: ' + e.message);
+      }
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      var div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function formatDate(iso) {
+      if (!iso) return '';
+      var d = new Date(iso);
+      return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+  </script>
+</body>
+</html>

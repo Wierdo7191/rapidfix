@@ -67,6 +67,48 @@ export default async function handler(req, res) {
         return res.status(201).json(data[0] || data);
       }
 
+      case 'PATCH': {
+        const adminCheck = await requireAdmin(req, res, SUPABASE_URL, SUPABASE_ANON_KEY, SERVICE_ROLE_KEY);
+        if (adminCheck) return adminCheck;
+
+        const { id, status } = req.body;
+
+        if (!id || !status) {
+          return res.status(400).json({ error: 'Missing required fields: id, status.' });
+        }
+
+        if (!['new', 'confirmed', 'completed', 'cancelled'].includes(status)) {
+          return res.status(400).json({ error: 'Invalid status.' });
+        }
+
+        const updateData = {
+          status: sanitizeString(status, 50),
+          updated_at: new Date().toISOString()
+        };
+
+        const patchResponse = await fetch(
+          `${SUPABASE_URL}/rest/v1/bookings?id=eq.${encodeURIComponent(id)}`,
+          {
+            method: 'PATCH',
+            headers: {
+              'apikey': SERVICE_ROLE_KEY,
+              'Authorization': `Bearer ${SERVICE_ROLE_KEY}`,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=representation'
+            },
+            body: JSON.stringify(updateData)
+          }
+        );
+
+        const patchData = await patchResponse.json();
+        if (!patchResponse.ok) {
+          console.error('[API] Supabase PATCH error:', patchData);
+          return res.status(patchResponse.status).json({ error: safeError(patchData.message) });
+        }
+
+        return res.status(200).json(patchData[0] || patchData);
+      }
+
       case 'GET': {
         const adminCheck = await requireAdmin(req, res, SUPABASE_URL, SUPABASE_ANON_KEY, SERVICE_ROLE_KEY);
         if (adminCheck) return adminCheck;
