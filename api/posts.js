@@ -179,10 +179,10 @@ export default async function handler(req, res) {
         const adminCheck = await requireAdmin(req, res, SUPABASE_URL, SUPABASE_ANON_KEY, SERVICE_ROLE_KEY);
         if (adminCheck) return adminCheck;
 
-        const { id } = req.body;
+        const id = req.query?.id;
 
-        if (!id) {
-          return res.status(400).json({ error: 'Missing required field: id.' });
+        if (!id || typeof id !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) {
+          return res.status(400).json({ error: 'Missing or invalid required field: id.' });
         }
 
         const deleteResponse = await fetch(
